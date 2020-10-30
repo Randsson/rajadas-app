@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Matricula:</strong>
+  <%= @invoice.matricula %>
+</p>
+
+<p>
+  <strong>Valor recebido:</strong>
+  <%= @invoice.valor_recebido %>
+</p>
+
+<p>
+  <strong>Data pagamento:</strong>
+  <%= @invoice.data_pagamento %>
+</p>
+
+<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+<%= link_to 'Back', invoices_path %>

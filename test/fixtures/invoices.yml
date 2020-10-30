@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  matricula: MyString
+  valor_recebido: 9.99
+  data_pagamento: MyString
+
+two:
+  matricula: MyString
+  valor_recebido: 9.99
+  data_pagamento: MyString

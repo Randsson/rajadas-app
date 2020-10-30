@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @arquivo.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @arquivo.body %>
+</p>
+
+<%= link_to 'Edit', edit_arquivo_path(@arquivo) %> |
+<%= link_to 'Back', arquivos_path %>
+<%= url_for @arquivo.documento %>
+<%= link_to @arquivo.documento.filename, rails_blob_path(@arquivo.documento, disposition: "attachment" ) %>
