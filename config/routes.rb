@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: "arquivos#index"
   resources :invoice_items
   resources :arquivos
   resources :invoices

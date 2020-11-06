@@ -1,3 +1,4 @@
 class Arquivo < ApplicationRecord
-    has_one_attached :documento
+    has_many_attached :documento
+
 end

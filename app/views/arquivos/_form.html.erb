@@ -18,12 +18,13 @@
 
   <div class="field">
     <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%= form.text_field :body %>
   </div>
 
   <div class="field">
     <%= form.label :documento %>
-    <%= form.file_field :documento %>
+    <%# <%= form.file_field :documento, multiple: true %>
+    <%= form.file_field :documento, multiple: true, accept: 'text/html' %>
   </div>
 
   <div class="actions">

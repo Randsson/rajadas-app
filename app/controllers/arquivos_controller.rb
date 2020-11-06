@@ -10,6 +10,7 @@ class ArquivosController < ApplicationController
   # GET /arquivos/1
   # GET /arquivos/1.json
   def show
+    # @caminho = Arquivo.documento_path(@arquivo)
   end
 
   # GET /arquivos/new
@@ -69,6 +70,6 @@ class ArquivosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def arquivo_params
-      params.require(:arquivo).permit(:title, :body, :documento)
+      params.require(:arquivo).permit(:title, :body, documento: [])
     end
 end

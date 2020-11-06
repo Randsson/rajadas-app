@@ -13,3 +13,48 @@
  *= require_tree .
  *= require_self
  */
+ *{
+    box-sizing: border-box;
+ }
+ 
+ .btn-novo,
+ .btn{
+     background-color: brown;
+     text-decoration: none;
+     border-radius: 5px;
+     padding: 5px;
+     color: aliceblue;
+ }
+ 
+ .btn-novo{
+    margin-top: 20px;
+ }
+
+ .btn-caixa{
+     margin: 20px;
+ }
+
+.show__box,
+ .main__box{
+     display: flex;
+     justify-content: center;
+     justify-items: center;
+     /* background-image: radial-gradient( circle 939px at 94.7% 50%,  rgba(0,178,169,1) 0%, rgba(0,106,101,1) 76.9% ); */
+     color: rgb(151, 29, 21);
+ }
+.show__box-itens,
+ .main__box-itens{
+    width: 860px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+
+ .arquivos-grade{
+    max-width: 400px;
+ }
+
+ .arquivos-grade a{
+     padding: 5px;
+ }
+
