@@ -1,0 +1,62 @@
+<h1>Conta::Display#index</h1>
+<%= @cod_barra %>
+<p>Find me in app/views/conta/display/index.html.erb</p>
+
+
+<div class= "table-responsive table-sm">
+  <table class="table table-striped table-bordered">
+    <thead class="bg-gradient-primary text-white">
+    <th>Código de registro</th>
+    <th>Data da transicao</th>
+    <th>Data da pagamento</th>
+    <th>Cod. barra</th>
+    <th>Valor recebido</th>
+    <th>NSR</th>
+    <th>Cod. ag. arrecadadora</th>
+    <th>Forma de arrecadacao</th>
+    <th>Num. autenticação</th>
+    <th>Forma de pagamento</th>
+  </thead>
+    <tbody class= "text-primary">
+      <% @arquivo.documento.each do |doc| %>
+        <tr>
+          <td><%= link_to doc.filename, rails_blob_path(doc, disposition: :attachment) %></td>
+          <td>
+            <% @barras.each do |barra| %>            
+              <p><%= link_to barra, conta_display_index_path(barra) %></p>
+              
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= 
+
+codigo = "G      202010130700142020101300000000826100000005152001282021529477082020000000030000000051520000000000000014640    4000059028              1        0"
+
+cod_reg = codigo[0] #Código do registro (fixo = “G”)
+branco = codigo[1..6]
+data_hora_transacao = codigo[7..20] #Data/hora da transação (AAAAMMDDHHMMSS)
+data_transicao = "#{codigo[7..10]}-#{codigo[11..12]}-#{codigo[13..14]}"#(AAAAMMDD)
+hora_transicao = "#{codigo[15..16]},#{codigo[17..18]},#{codigo[19..20]}"#(HHMMSS)
+data_pagamento = [ codigo[21..24], codigo[25..26], codigo[27..28] ].reverse.map{ |s| "#{s}-" }.join[0...-1]
+zeros = codigo[29..36] # Ignorar??
+cod_barra = codigo[37..80] # Ignorar??
+valor_recebido = codigo[81..92].insert(-3, ',').sub!(/^0+/,'') #duas casas decimais
+mais_zeros = codigo[93..99] # Ignorar??
+nsr =  codigo[100..107] # Número Seqüencial de Registro 
+cod_agencia_arrecadadora = codigo[108..115]
+forma_arrecadacao_captura = codigo[116]
+num_autenticacao_ou_cod_transacao = codigo[117..139].sub!(/^0+/,'')
+forma_pagamento = codigo[140]
+reservado = codigo[141..148]
+tipo_de_transacao = codigo[149]
+
+puts normalizado = "Código de registro: #{cod_reg}\nData: #{data_pagamento}\nCódigo de barra: #{cod_barra}\nValor recebido: R$ #{valor_recebido}\nNSR: #{nsr}
+Código da agência arrecadadora: #{cod_agencia_arrecadadora}\nForma de arrecadação: #{forma_arrecadacao_captura}
+Número da autenticação caixa ou código de transação: #{num_autenticacao_ou_cod_transacao}\nForma de pagamento: #{forma_pagamento}"
+
+ %>

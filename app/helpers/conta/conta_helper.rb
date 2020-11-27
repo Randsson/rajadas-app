@@ -1,2 +1,0 @@
-module Conta::ContaHelper
-end

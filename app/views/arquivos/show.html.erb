@@ -42,7 +42,7 @@
           <td><%= link_to doc.filename, rails_blob_path(doc, disposition: :attachment) %></td>
           <td>
             <% @barras.each do |barra| %>            
-              <p><%= link_to barra, '#' %></p>
+              <p><%= link_to barra, conta_display_index_path(barra) %></p>
               
             <% end %>
           </td>

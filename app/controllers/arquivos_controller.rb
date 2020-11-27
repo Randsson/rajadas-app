@@ -31,7 +31,7 @@ class ArquivosController < ApplicationController
 
     respond_to do |format|
       if @arquivo.save
-        format.html { redirect_to @arquivo, notice: 'Arquivo was successfully created.' }
+        format.html { redirect_to @arquivo, notice: 'Arquivo criado com sucesso' }
         format.json { render :show, status: :created, location: @arquivo }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class ArquivosController < ApplicationController
   def update
     respond_to do |format|
       if @arquivo.update(arquivo_params)
-        format.html { redirect_to @arquivo, notice: 'Arquivo was successfully updated.' }
+        format.html { redirect_to @arquivo, notice: 'Arquivo atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @arquivo }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class ArquivosController < ApplicationController
   def destroy
     @arquivo.destroy
     respond_to do |format|
-      format.html { redirect_to arquivos_url, notice: 'Arquivo was successfully destroyed.' }
+      format.html { redirect_to arquivos_url, notice: 'Arquivo excluído com sucesso' }
       format.json { head :no_content }
     end
   end

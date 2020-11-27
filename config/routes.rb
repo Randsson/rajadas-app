@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   namespace :conta do
-    get 'conta/index'
+    get 'display/index'
   end
+  
   root to: "arquivos#index"
   resources :invoice_items
   resources :arquivos
