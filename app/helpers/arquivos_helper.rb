@@ -37,4 +37,5 @@ module ArquivosHelper
     file[1...-1].each { |line| @barras << line.strip }
     @barras
   end
+  
 end

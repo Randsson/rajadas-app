@@ -31,18 +31,19 @@
 </div>
 
 <div class= "table-responsive table-sm">
-  <table class="table table-striped table-bordered table-hover">
+  <table class="table table-striped table-bordered">
     <thead class="bg-gradient-primary text-white">
     <th>Arquivo</th>
     <th colspan="100">Códigos de Barra</th>
   </thead>
-    <tbody>
+    <tbody class= "text-primary">
       <% @arquivo.documento.each do |doc| %>
         <tr>
-          <td><%= doc.filename %></td>
+          <td><%= link_to doc.filename, rails_blob_path(doc, disposition: :attachment) %></td>
           <td>
             <% @barras.each do |barra| %>            
-              <p><%= barra %></p>
+              <p><%= link_to barra, '#' %></p>
+              
             <% end %>
           </td>
         </tr>
