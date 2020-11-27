@@ -1,33 +1,41 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header"><%= @action_message %></h1>
+  </div>
+</div>
+  
+<% if @arquivo.errors.any? %>
+   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+     <ul>
+      <% @arquivo.errors.full_messages.each do |error| %>
+        <li> <%= error %></li>
+      <%end%>
+    </ul>
+  </div>
+<% end %>
 <%= form_with(model: arquivo, local: true) do |form| %>
-  <% if arquivo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(arquivo.errors.count, "error") %> prohibited this arquivo from being saved:</h2>
 
-      <ul>
-      <% arquivo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div class="field">
+     <div class="form-group">
+      <%= form.label :title, "Título" %>
+      <%= form.text_field :title, class:"form-control" %> 
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+    <%= form.label :body, 'Descrição' %>
+    <%= form.text_field :body, class:"form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :body %>
-    <%= form.text_field :body %>
-  </div>
-
-  <div class="field">
-    <%= form.label :documento %>
+    <%= form.label :documento, 'Arquivos:' %>
     <%# <%= form.file_field :documento, multiple: true %>
-    <%= form.file_field :documento, multiple: true, accept: 'text/html' %>
+    <%= form.file_field :documento, multiple: true, class:"form-control-file" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Enviar', class:"btn btn-primary" %>
   </div>
 <% end %>

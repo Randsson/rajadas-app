@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :file_panel do
+    get 'welcome/index'
+  end
   root to: "arquivos#index"
   resources :invoice_items
   resources :arquivos

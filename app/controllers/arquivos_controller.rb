@@ -1,5 +1,8 @@
 class ArquivosController < ApplicationController
-  before_action :set_arquivo, only: [:show, :edit, :update, :destroy]
+  include ArquivosHelper
+  layout 'files_panel'
+  before_action :set_arquivo, only: %i[show edit update destroy]
+  before_action :set_cod_barra, only: %i[show]
 
   # GET /arquivos
   # GET /arquivos.json
@@ -19,8 +22,7 @@ class ArquivosController < ApplicationController
   end
 
   # GET /arquivos/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /arquivos
   # POST /arquivos.json
@@ -63,13 +65,18 @@ class ArquivosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_arquivo
-      @arquivo = Arquivo.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def arquivo_params
-      params.require(:arquivo).permit(:title, :body, documento: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_arquivo
+    @arquivo = Arquivo.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def arquivo_params
+    params.require(:arquivo).permit(:title, :body, documento: [])
+  end
+
+  def set_cod_barra
+    @barras = selecionar_docs(@arquivo)
+  end
 end

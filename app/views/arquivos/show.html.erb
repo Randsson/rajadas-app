@@ -1,27 +1,57 @@
-<div class= "show__box">
-  <div class="show__box-itens">
-    <p id="notice"><%= notice %></p>
+<div class= "table-responsive table-sm">
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="bg-gradient-primary text-white">
+      <tr>
+        <th class= "">Título</th>
+        <th>Descrição</th>
+        <th>Arquivos</th>
+        <th>Acões:</th>
+      </tr>
+    </thead>
+    <tbody class= "text-primary">
+      <tr>
+        <td><%=  @arquivo.title %></td>
+        <td> <%= @arquivo.body %></td>
+        <td>
+          <div class="arquivos-grade">
+            <% @arquivo.documento.each do |doc| %>
+              <%= link_to doc.filename, rails_blob_path(doc, disposition: :attachment) %>
+            <% end %>
+          </div>
+        </td>
 
-    <p>
-      <strong>Título:</strong>
-      <%= @arquivo.title %>
-    </p>
-
-    <p>
-      <strong>Descrição:</strong>
-      <%= @arquivo.body %>
-    </p>
-
-    <div class="arquivos-grade">
-      <% @arquivo.documento.each do |doc| %>
-        <%= link_to doc.filename, rails_blob_path(doc, disposition: :attachment) %>
-      <% end  %>
-    </div>
-
-    <div class="btn-caixa">
-      <%= link_to 'Editar', edit_arquivo_path(@arquivo), class: 'btn' %>
-      <%= link_to 'Voltar', arquivos_path, class: 'btn' %><br><br>
-      <%= selecionar_docs(@arquivo)%><br>
-    </div>
-  </div>
+        <td>
+        <%= link_to arquivo_path(@arquivo), class:"btn btn-info btn-sm  " do %>
+            <i class="fas fa-folder-open"></i>
+        <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<div class= "table-responsive table-sm">
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="bg-gradient-primary text-white">
+    <th>Arquivo</th>
+    <th colspan="100">Códigos de Barra</th>
+  </thead>
+    <tbody>
+      <% @arquivo.documento.each do |doc| %>
+        <tr>
+          <td><%= doc.filename %></td>
+          <td>
+            <% @barras.each do |barra| %>            
+              <p><%= barra %></p>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to 'Editar', edit_arquivo_path(@arquivo), class: 'btn' %>
+      <%= link_to 'Voltar', arquivos_path, class: 'btn' %><br><br>
+
+    

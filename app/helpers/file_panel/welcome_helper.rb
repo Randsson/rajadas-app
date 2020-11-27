@@ -1,0 +1,2 @@
+module FilePanel::WelcomeHelper
+end
