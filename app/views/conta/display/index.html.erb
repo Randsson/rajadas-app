@@ -11,7 +11,15 @@
                             <tbody>
                                 <tr>
                                     <th class="center">Código de Registro:</th>
-                                    <td class="center"><%= @cod_leitura[0] %></td>
+                                    <td class="center"><%= @cod_leitura[59..61] %></td>
+                                </tr>
+                                <tr>
+                                    <th class="center">matricula 01#:</th>
+                                    <td class="center"><%= @cod_leitura[62..68] %></td>
+                                </tr>
+                                <tr>
+                                    <th class="center">matricula 02#:</th>
+                                    <td class="center"><%= @cod_leitura[60..67] %></td>
                                 </tr>
                                   <tr>
                                     <th class="center">Código de barra:</th>
@@ -51,7 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><br>
     <div class="pull-right"> 
       <%# <a class="btn btn-sm btn-info" href="#" data-abc="true"><i class="fa fa-print mr-1"></i> Imprimir</a> %>
       <input type="button" value="Voltar" onClick="history.go(-1);" class="btn btn-sm btn-info">
