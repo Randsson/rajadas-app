@@ -37,5 +37,8 @@ module ArquivosHelper
     file[1...-1].each { |line| @barras << line.strip }
     @barras
   end
-  
+
+  def verifica_duplicadas(arquivo)
+    arquivo.group_by { |e| e }.select { |_k, v| v.size > 1 }.keys
+  end
 end
