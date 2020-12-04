@@ -1,41 +1,14 @@
 module ArquivosHelper
-  def selecionar_docs(arquivo)
-    a = []
-    docs = []
-    arquivo.documento.each do |doc|
-      a << ActiveStorage::Blob.service.path_for(doc.key)
+  def extrair_path_arquivo(arquivo)
+    arquivo.documento.reduce([]) do |paths, doc|
+      paths << ActiveStorage::Blob.service.path_for(doc.key)
     end
-
-    a.each do |file|
-      arq = File.readlines(file)
-      puts "acessando #{file}..."
-      arq[1...-1].each { |line| docs << line }
-    end
-    docs
   end
 
-  def buscar_cod_barra(arquivo, matricula)
-    a = []
-    doc = []
-    arquivo.documento.each do |doc|
-      a << ActiveStorage::Blob.service.path_for(doc.key)
-    end
-
-    a.each do |file|
-      arq = File.readlines(file)
-      puts "acessando #{file}..."
-      arq[1...-1].each { |line| doc << line if line[59..67].match matricula }
-    end
-    "achei #{doc.size}:\n #{doc}"
-  end
-
-  def extrair_cod_barra(doc)
-    puts "acessando documento #{doc}..."
-    @barras = []
-    arq = ActiveStorage::Blob.service.path_for(doc.key)
-    file = File.readlines(arq)
-    file[1...-1].each { |line| @barras << line.strip }
-    @barras
+  def extrair_cod_barra(arquivo)
+    path = ActiveStorage::Blob.service.path_for(arquivo.key)
+    doc = File.readlines(path)
+    doc[1...-1]
   end
 
   def verifica_duplicadas(arquivo)
@@ -43,21 +16,15 @@ module ArquivosHelper
   end
 
   def valor_total_arquivo(arquivo)
-    a = []
-    valor = []
-    arquivo.documento.each do |doc|
-      a << ActiveStorage::Blob.service.path_for(doc.key)
-    end
+    paths = extrair_path_arquivo(arquivo)
 
-    a.each do |file|
-      arq = File.readlines(file)
-      puts "acessando #{file}..."
-      valor << arq[-1][7..23]
+    paths.reduce([]) do |valores, path|
+      doc = File.readlines(path)
+      valores << doc[-1][7..23]
     end
-    valor
   end
 
   def number_to_currency_br(number)
-    number_to_currency(number, :unit => "R$ ", :separator => ",", :delimiter => ".")
+    number_to_currency(number, unit: 'R$ ', separator: ',', delimiter: '.')
   end
 end
