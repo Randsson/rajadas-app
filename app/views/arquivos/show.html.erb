@@ -6,7 +6,7 @@
         <th class= "">Título</th>
         <th>Descrição</th>
         <th>Arquivos</th>
-        <th>Acões:</th>
+        <th>Valor total recebido dos registros do arquivo</th>
       </tr>
     </thead>
     <tbody class= "text-primary">
@@ -21,11 +21,11 @@
           </div>
         </td>
 
-        <td>
-        <%= link_to arquivo_path(@arquivo), class:"btn btn-info btn-sm  " do %>
-            <i class="fas fa-folder-open"></i>
+        <%= @valor_total.each do |valor| %>
+          <td>
+            <%= number_to_currency_br(valor.insert(-3,'.'))  %>
+          </td>
         <% end %>
-        </td>
       </tr>
     </tbody>
   </table>

@@ -3,6 +3,7 @@ class ArquivosController < ApplicationController
   layout 'files_panel'
   before_action :set_arquivo, only: %i[show edit update destroy]
   before_action :set_cod_barra, only: %i[show]
+  before_action :set_valor_total, only: %i[show]
 
   # GET /arquivos
   # GET /arquivos.json
@@ -12,9 +13,7 @@ class ArquivosController < ApplicationController
 
   # GET /arquivos/1
   # GET /arquivos/1.json
-  def show
-    # @caminho = Arquivo.documento_path(@arquivo)
-  end
+  def show; end
 
   # GET /arquivos/new
   def new
@@ -78,5 +77,9 @@ class ArquivosController < ApplicationController
 
   def set_cod_barra
     @barras = selecionar_docs(@arquivo)
+  end
+
+  def set_valor_total
+    @valor_total = valor_total_arquivo(@arquivo)
   end
 end

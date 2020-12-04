@@ -41,4 +41,23 @@ module ArquivosHelper
   def verifica_duplicadas(arquivo)
     arquivo.group_by { |e| e }.select { |_k, v| v.size > 1 }.keys
   end
+
+  def valor_total_arquivo(arquivo)
+    a = []
+    valor = []
+    arquivo.documento.each do |doc|
+      a << ActiveStorage::Blob.service.path_for(doc.key)
+    end
+
+    a.each do |file|
+      arq = File.readlines(file)
+      puts "acessando #{file}..."
+      valor << arq[-1][7..23]
+    end
+    valor
+  end
+
+  def number_to_currency_br(number)
+    number_to_currency(number, :unit => "R$ ", :separator => ",", :delimiter => ".")
+  end
 end
