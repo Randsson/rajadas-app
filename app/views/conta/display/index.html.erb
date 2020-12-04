@@ -2,7 +2,7 @@
     <div>
         <div>
             <div class="card">
-                <div class="card-header"><strong> Detalhes do Arquivo</strong> 
+                <div class="card-header"><strong> Detalhes do Arquivo <%= @all_params %></strong> 
                 </div>
                  
                 <div class="card-body">
@@ -94,8 +94,8 @@
                                 </tr>
 
                                  <tr>
-                                    <th class="right">Identificação do Pagamento</th>
-                                    <td class="right"><%= cod_barra[19..43] %></td>
+                                    <th class="center">Identificação do Pagamento</th>
+                                    <td class="center"><%= cod_barra[19..43] %></td>
                                 </tr>                            
                             </tbody>
                         </table>
@@ -146,8 +146,8 @@
 
 
                                         <tr>
-                                            <th class="right">Tipo de Documento (no caso = 3)</th>
-                                            <td class="right"><%= cod_pag[24]%> - Conta </td>
+                                            <th class="center">Tipo de Documento (no caso = 3)</th>
+                                            <td class="center"><%= cod_pag[24]%> - Conta </td>
                                         </tr>                            
                                     </tbody>
                                 <% elsif cod_pag[24].match (/[46]/) %>
@@ -322,8 +322,8 @@
                                         </tr>
 
                                         <tr>
-                                            <th class="right">Tipo de Documento (no caso = 1 ou 9)</th>
-                                            <td class="right"><%= cod_pag[24]%> - Guia de pagamento com identificação </td>
+                                            <th class="center">Tipo de Documento (no caso = 1 ou 9)</th>
+                                            <td class="center"><%= cod_pag[24]%> - Guia de pagamento com identificação </td>
                                         </tr>                            
                                 </tr>                                    
                                         </tr>                            
