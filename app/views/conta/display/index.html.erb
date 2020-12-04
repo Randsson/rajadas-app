@@ -1,14 +1,18 @@
 <div class="container-fluid mt-100 mb-100">
-    <div id="ui-view">
+    <div>
         <div>
             <div class="card">
-                <div class="card-header"><strong> Detalhes do Código</strong> 
+                <div class="card-header"><strong> Detalhes do Arquivo</strong> 
                 </div>
                  
                 <div class="card-body">
                     <div class="table-responsive-sm">
                         <table class="table table-striped">
                             <tbody>
+                                <tr>
+                                    <th class="center">Banco:</th>
+                                    <td class="center"><%= @cod_leitura[59..61] %></td>
+                                </tr>
                                 <tr>
                                     <th class="center">Código de Registro:</th>
                                     <td class="center"><%= @cod_leitura[59..61] %></td>
@@ -49,7 +53,6 @@
 
             <div class="card">
                 <div class="card-header"><strong> <%= @arquivo %> Detalhes do Código de Barra</strong> 
-                <%# <% cod_barra = @cod_leitura[37..80]  %> %>
                 <% cod_barra = @cod_leitura[37..80]  %>
                 </div>
                  

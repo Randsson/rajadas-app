@@ -2,7 +2,6 @@ class ArquivosController < ApplicationController
   include ArquivosHelper
   layout 'files_panel'
   before_action :set_arquivo, only: %i[show edit update destroy]
-  before_action :set_cod_barra, only: %i[show]
   before_action :set_valor_total, only: %i[show]
 
   # GET /arquivos
@@ -13,7 +12,9 @@ class ArquivosController < ApplicationController
 
   # GET /arquivos/1
   # GET /arquivos/1.json
-  def show; end
+  def show
+    # set_agencia
+  end
 
   # GET /arquivos/new
   def new
@@ -75,11 +76,10 @@ class ArquivosController < ApplicationController
     params.require(:arquivo).permit(:title, :body, documento: [])
   end
 
-  def set_cod_barra
-    @barras = selecionar_docs(@arquivo)
-  end
-
   def set_valor_total
     @valor_total = valor_total_arquivo(@arquivo)
   end
+  # def set_agencia
+  #   @agencia = extrair_agencia(@arquivo)
+  # end
 end
