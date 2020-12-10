@@ -1,0 +1,2 @@
+module Conta::SearchHelper
+end
