@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :conta do
     get 'display/index'
-    get 'search/filters'
+    get 'search/index'
   end
   
   root to: "arquivos#index"

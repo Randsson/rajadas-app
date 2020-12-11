@@ -3,6 +3,7 @@ class ArquivosController < ApplicationController
   layout 'files_panel'
   before_action :set_arquivo, only: %i[show edit update destroy]
   before_action :set_valor_total, only: %i[show]
+  before_action :set_campos_barra, only: %i[show]
 
   # GET /arquivos
   # GET /arquivos.json
@@ -79,7 +80,9 @@ class ArquivosController < ApplicationController
   def set_valor_total
     @valor_total = valor_total_arquivo(@arquivo)
   end
-  # def set_agencia
-  #   @agencia = extrair_agencia(@arquivo)
-  # end
+  
+  def set_campos_barra
+    @campos = cod_barra_campos
+  end
+
 end

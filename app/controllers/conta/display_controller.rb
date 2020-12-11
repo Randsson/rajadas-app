@@ -10,11 +10,7 @@ class Conta::DisplayController < ApplicationController
   end
 
   private
-
-  def set_arquivo
-    @arquivo = params[:id]
-  end
-
+ 
   def canais_de_recebimento
     @canais_de_recebimento = {
       '1' => 'Guichê de Caixa com fatura/guia de arrecadação',

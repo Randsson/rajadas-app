@@ -1,0 +1,12 @@
+
+<div class= "table-responsive table-sm">
+  <table class="table table-striped table-bordered">
+    <thead class="bg-gradient-primary text-white">
+    <th>Arquivo</th>
+    <th class='center'>Qtd de códigos</th>
+    <th colspan="100">Códigos de Retorno das Arrecadações Identificadas</th>
+      <%= @arquivo %>
+</div>
+
+<%= link_to 'Editar', edit_arquivo_path(@arquivo), class: 'btn btn-sm btn-info' %>
+<%= link_to 'Voltar', arquivo_path(@arquivo), class: 'btn btn-sm btn-info' %><br><br>

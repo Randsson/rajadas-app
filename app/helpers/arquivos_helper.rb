@@ -27,4 +27,13 @@ module ArquivosHelper
   def number_to_currency_br(number)
     number_to_currency(number, unit: 'R$ ', separator: ',', delimiter: '.')
   end
+
+  def cod_barra_campos
+    campos = [
+      ['NSR', 1],
+      ['Tipo do documento', 2],
+      ['Código da Localidade', 3],
+      ['Forma de Arrecadação', 4]
+    ]
+  end
 end
