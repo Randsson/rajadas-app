@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Rajadas App</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application'%>
     <%= stylesheet_link_tag    'arquivos'%>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,17 +52,9 @@
             <!-- Divider -->
 
             <li class="nav-item">
-                <%= link_to invoices_path, class: "nav-link" do %>
+                <%= link_to conta_cod_barra_index_path, class: "nav-link" do %>
                     <i class="fas fa-fw fa-users-cog"></i>
                     <span>Contas</span></a>
-                <% end %>
-            </li>
-
-
-              <li class="nav-item">
-                <%= link_to invoice_items_path, class:'nav-link' do %>
-                    <i class="fas fa-question-circle"></i>
-                    <span>Itens de Conta</span></a>
                 <% end %>
             </li>
         </ul>
@@ -125,7 +117,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; randssondouglas 2020</span>
+                        <span>Copyright &copy; GETIN - 2020</span>
                     </div>
                 </div>
             </footer>
