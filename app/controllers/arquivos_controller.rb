@@ -1,6 +1,8 @@
 class ArquivosController < ApplicationController
+  before_action :authenticate_user!
   include ApplicationHelper
   layout 'files_panel'
+
   before_action :set_arquivo, only: %i[show edit update destroy]
   before_action :set_valor_total, only: %i[show]
   before_action :set_campos_barra, only: %i[show]
@@ -15,6 +17,19 @@ class ArquivosController < ApplicationController
   # GET /arquivos/1.json
   def show
     # set_agencia
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Tabela do Arquivo: #{@arquivo.id}",
+               page_size: 'A4',
+               template: "arquivos/_show_barras.html.erb",
+               layout: 'pdf.html',
+               orientation: 'Landscape',
+               lowquality: true,
+               zoom: 1,
+               dpi: 75
+      end
+    end
   end
 
   # GET /arquivos/new
@@ -80,9 +95,8 @@ class ArquivosController < ApplicationController
   def set_valor_total
     @valor_total = valor_total_arquivo(@arquivo)
   end
-  
+
   def set_campos_barra
     @campos = cod_barra_campos
   end
-
 end
