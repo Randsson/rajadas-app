@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  cod_documento: MyString
-  invoice: one
-
-two:
-  cod_documento: MyString
-  invoice: two
