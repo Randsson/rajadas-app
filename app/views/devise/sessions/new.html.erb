@@ -1,26 +1,113 @@
-<h2>Log in</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application'%>
+    <%= stylesheet_link_tag    'arquivos'%>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> User - Login </title>
+  </head>
+
+  <body class="login bg-gradient-primary"">
+     
+  <div class="container">
+          <!-- Outer Row -->
+      <div class="row justify-content-center">
+
+          <div class="col-xl-10 col-lg-12 col-md-9">
+
+              <div class="card o-hidden border-0 shadow-lg my-5">
+                  <div class="card-body p-0">
+                      <!-- Nested Row within Card Body -->
+                      <div class="row">
+                          <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                          <div class="col-lg-6">
+                              <div class="p-5">
+                                  <div class="text-center">
+                                      <h1 class="h4 text-gray-900 mb-4">Bem-vindo de volta!</h1>
+                                  </div>
+                                  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'user' }, role:'form')do |f| %>
+                                        <div class="form-group">
+                                          <%= f.email_field :email, autofocus: true, placeholder:"Digite o e-mail...", class:"form-control form-control-user" %>
+                                        </div>
+
+                                        <div class="form-group"">
+                                          <%= f.password_field :password, placeholder:"Digite a senha...", class:"form-control form-control-user" %>
+                                        </div>
+
+                                        <% if devise_mapping.rememberable? %>
+                                          <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                              <%= f.check_box :remember_me, class:'custom-control-input' %>
+                                              <%= f.label :remember_me, 'Lembrar', class:'custom-control-label' %>
+                                            </div>
+                                          </div>
+                                        <% end %>
+                                        <div class="form-group">
+                                          <%= f.submit "Login", class:'btn btn-primary btn-user btn-block' %>
+                                        </div>
+                                      <hr>
+                                      <a href="index.html" class="btn btn-google btn-user btn-block">
+                                          <i class="fab fa-google fa-fw"></i> Login with Google
+                                      </a>
+                                      <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                          <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                      </a>
+                                  <% end %>
+                                  <hr>
+                                  <div class="text-center">
+                                      <%= link_to 'Crie uma conta!', new_user_registration_path, class: 'large' %>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'arquivos' %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
+   <% if flash %>
+    <% flash.each do |key, value| %>
+      <%= javascript_tag do %>
+          $.bootstrapGrowl( "<%=value%>" , {
+              ele: 'body', // which element to append to
+              type: 'danger', // (null, 'info', 'danger', 'success')
+              offset: {from: 'top', amount: 20}, // 'top', or 'bottom'
+              align: 'center', // ('left', 'right', or 'center')
+              width: 250, // (integer, or 'auto')
+              delay: 4000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+              allow_dismiss: true, // If true then will display a cross to close the popup.
+              stackup_spacing: 10 // spacing between consecutively stacked growls.
+          });
+      <% end %>
+    <% end %>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+  <% unless resource.errors.empty? %>
+    <% resource.errors.full_messages.each do | value| %>
+      <%= javascript_tag do %>
+          $.bootstrapGrowl( "<%=value%>" , {
+              ele: 'body', // which element to append to
+              type: 'danger', // (null, 'info', 'danger', 'success')
+              offset: {from: 'top', amount: 20}, // 'top', or 'bottom'
+              align: 'center', // ('left', 'right', or 'center')
+              width: 250, // (integer, or 'auto')
+              delay: 4000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+              allow_dismiss: true, // If true then will display a cross to close the popup.
+              stackup_spacing: 10 // spacing between consecutively stacked growls.
+          });
+      <% end %>
+    <% end %>
+  <% end %>
+  </body>
+</html>
 
-<%= render "devise/shared/links" %>
