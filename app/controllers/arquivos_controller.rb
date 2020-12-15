@@ -1,5 +1,5 @@
 class ArquivosController < ApplicationController
-  include ArquivosHelper
+  include ApplicationHelper
   layout 'files_panel'
   before_action :set_arquivo, only: %i[show edit update destroy]
   before_action :set_valor_total, only: %i[show]
