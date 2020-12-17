@@ -41,7 +41,10 @@
     <% end %>
     </tbody>
   </table>
-    <%= link_to new_arquivo_path, class:"btn btn-outline-primary" do %>
+  <%= link_to new_arquivo_path, class:"btn btn-outline-primary" do %>
     <i class="fas fa-file-alt"></i> Add arquivo
+  <% end %>
+  <%= link_to destroy_user_session_path, method: :delete, class:"btn btn-outline-primary" do %>
+    <i class="fas fa-file-alt"></i> Logout
   <% end %>
 </div>
