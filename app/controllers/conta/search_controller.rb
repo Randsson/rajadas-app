@@ -4,6 +4,7 @@ class Conta::SearchController < ApplicationController
   before_action :set_arquivo, only: %i[index]
   before_action :set_valor_total, only: %i[index]
   before_action :set_campos_barra, only: %i[index]
+  before_action :set_tamanho_barra, only: %i[index]
  
   def index
     @filtro = params[:filtro]
@@ -22,5 +23,9 @@ class Conta::SearchController < ApplicationController
 
   def set_campos_barra
     @campos = cod_barra_campos
+  end
+
+  def set_tamanho_barra
+    @tamanho_barra = extrair_cod_barra(@arquivo.documento.first)
   end
 end
