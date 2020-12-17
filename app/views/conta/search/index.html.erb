@@ -1,13 +1,13 @@
 <div class= "table-responsive table-sm">
   <table class="table table-striped table-bordered table-hover">
   <h1>Detalhes do Arquivo</h1>
-   <% checker = extrair_cod_barra(@arquivo.documento.first) %>
+    
     <thead class="bg-gradient-primary text-white">
       <tr>
         <th class= "">Título</th>
         <th>Descrição</th>
         <th>Arquivos</th>
-        <% if checker.first.size > 45 %>
+        <% if @tamanho_barra.first.size > 45 %>
           <th>Valor Total Recebido</th>
         <% end  %>
       </tr>
@@ -23,7 +23,7 @@
             <% end %>
           </div>
         </td>
-        <% if checker.first.size < 45 %>
+        <% if @tamanho_barra.first.size < 45 %>
           <td>
             <% @valor_total.each do |valor| %>    
               <span style="font-size: 100%;", class="badge badge-info"><%= number_to_currency_br(valor.insert(-3,'.'))%></span>
@@ -44,7 +44,7 @@
   </div>
 <% end %>
 
-<% if checker.first.size > 45 %>
+<% if @tamanho_barra.first.size > 45 %>
   <div class= "table-responsive table-sm" id="table-show">
     <table class="table table-striped table-bordered">
         <thead class="bg-gradient-primary text-white">
@@ -114,5 +114,5 @@
 
 <%= link_to 'Editar', edit_arquivo_path(@arquivo), class: 'btn btn-sm btn-info' %>
 <%= link_to 'Voltar', arquivos_path, class: 'btn btn-sm btn-info' %><br><br>
-<%= link_to "DOWNLOAD PDF", arquivo_path(@arquivo, format: :pdf) %>
+<%= link_to "Baixar PDF", arquivo_path(@arquivo, format: :pdf), class:"btn btn-sm btn-success" %>
 
