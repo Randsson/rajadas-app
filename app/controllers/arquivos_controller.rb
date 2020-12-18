@@ -6,6 +6,7 @@ class ArquivosController < ApplicationController
   before_action :set_arquivo, only: %i[show edit update destroy]
   before_action :set_valor_total, only: %i[show]
   before_action :set_campos_barra, only: %i[show]
+  before_action :set_tamanho_barra, only: %i[show]
 
   # GET /arquivos
   # GET /arquivos.json
@@ -98,5 +99,9 @@ class ArquivosController < ApplicationController
 
   def set_campos_barra
     @campos = cod_barra_campos
+  end
+
+  def set_tamanho_barra
+    @tamanho_barra = extrair_cod_barra(@arquivo.documento.first)
   end
 end

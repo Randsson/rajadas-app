@@ -1,6 +1,6 @@
 class Conta::DisplayController < ApplicationController
   layout 'files_panel'
-  # before_action :set_arquivo, only: %w[index]
+  before_action :set_barra, only: %w[show]
 
   def index
     @cod_leitura = params[:format]
@@ -9,7 +9,16 @@ class Conta::DisplayController < ApplicationController
     localidades
   end
 
+  def show
+  end
+  
+
+
   private
+
+  def set_barra
+    @barra = params[:id].strip
+  end
  
   def canais_de_recebimento
     @canais_de_recebimento = {
