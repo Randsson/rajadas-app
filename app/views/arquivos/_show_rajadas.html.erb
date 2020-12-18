@@ -1,0 +1,43 @@
+
+<div class= "table-responsive table-sm" id="table-show ">
+  <table class="table table-striped table-bordered">
+  <h1>Rajadassss</h1>
+    <thead class="bg-gradient-primary text-white">
+    <th>Arquivo</th>
+    <th> Localidade</th>
+    <th> Matricula</th>
+    <th> Valor</th>
+    <th> mes/ano referencia</th>
+  </thead>
+    <tbody class= "text-primary">
+      <% @arquivo.documento.each do |doc| %>
+        <tr>
+          <td><%= link_to doc.filename, rails_blob_path(doc, disposition: :attachment) %></td>
+
+          <% extrair_cod_barra(doc).each do |cod_barra| %>
+           <% barra = cod_barra[37..80]  %> 
+          <tr>
+            <td><p><%= link_to cod_barra, conta_cod_barra_index_path(cod_barra) %></p></td>
+            <td><%= barra[19..21] %></td>
+            <% if barra[19..21] == '820' || barra[19..21] == '840' %>
+              <td class="center"><%= barra[22..29] %></td>
+            <% else %>
+              <td class="center"><%= barra[22..30] %></td>  
+            <% end %>
+            <td class="center"><%= barra[4..14].insert(-3, ',').sub!(/^0+/,'')  %></td>
+            <% if barra[19..21] == '820' %>
+              <td class="center"><%= barra[30..35] %></td>
+            <% else %>
+              <td class="center"><%= barra[33..38] %></td>
+            <% end %>
+          <% end %>
+          </tr>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to 'Editar', edit_arquivo_path(@arquivo), class: 'btn btn-sm btn-info' %>
+<%= link_to 'Voltar', arquivos_path, class: 'btn btn-sm btn-info' %><br><br>
+<%= link_to "DOWNLOAD PDF", arquivo_path(@arquivo, format: :pdf) %>
