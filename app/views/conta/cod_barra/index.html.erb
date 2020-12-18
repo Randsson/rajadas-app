@@ -1,238 +1,239 @@
 <div class="card">
-                <div class="card-header"><strong> <%= @arquivo %> Detalhes do Código de Barra</strong> 
-                <% cod_barra = @cod_leitura  %>
-                </div>
-                 
-                <div class="card-body">
-                    <div class="table-responsive-sm">
-                        <table class="table table-striped">
-                        <thead>
-                         <tr>
-                             <th class="center">Produto (valor fixo = 8):</th>
-                             <th class="center">Segmento (valor fixo = 2):</th>
-                             <th class="center">Identificação Valor real ou referência:</th>
-                             <th class="center">Dígito verificador geral:</th>
-                             <th class="center">Valor Efetivo ou de Referência:</th>
-                             <th class="center">Identificação da Empresa</th>
-                             <th class="center">Identificação do Pagamento</th>
-                         </tr>
-                        </thead>
-                            <tbody>
-                              <tr>
-                               <td class="center"><%= cod_barra[0] %></td>
-                               <td class="center"><%= cod_barra[1] %></td>
-                               <td class="center"><%= cod_barra[2] %></td>
-                               <td class="center"><%= cod_barra[3] %></td>
-                               <td class="center"><%= cod_barra[4..14].insert(-3, ',')  %></td>
-                               <td class="center"><%= cod_barra[15..18] %></td>
-                               <td class="center"><%= cod_barra[19..43] %></td>
-                              </tr>      
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <div class="card-header"><strong> <%= @arquivo %> Detalhes do Código de Barra</strong> 
+    <% cod_barra = @cod_leitura  %>
+    </div>
+        
+    <div class="card-body">
+        <div class="table-responsive-sm">
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="center">Produto (valor fixo = 8):</th>
+                    <th class="center">Segmento (valor fixo = 2):</th>
+                    <th class="center">Identificação Valor real ou referência:</th>
+                    <th class="center">Dígito verificador geral:</th>
+                    <th class="center">Valor Efetivo ou de Referência:</th>
+                    <th class="center">Identificação da Empresa</th>
+                    <th class="center">Identificação do Pagamento</th>
+                </tr>
+            </thead>
+                <tbody>
+                    <tr>
+                    <td class="center"><%= cod_barra[0] %></td>
+                    <td class="center"><%= cod_barra[1] %></td>
+                    <td class="center"><%= cod_barra[2] %></td>
+                    <td class="center"><%= cod_barra[3] %></td>
+                    <td class="center"><%= cod_barra[4..14].insert(-3, ',')  %></td>
+                    <td class="center"><%= cod_barra[15..18] %></td>
+                    <td class="center"><%= cod_barra[19..43] %></td>
+                    </tr>      
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-            <div class="card">
-                <div class="card-header"><strong> Detalhes da Identificação de Pagamento </strong> 
-                <% cod_pag = cod_barra[19..43]  %>
-                </div>
-                        <div class="card-body">
-                            <div class="table-responsive-sm">
-                                <table class="table table-striped">
-                                
-                                <% if cod_pag[24].match(/3/)%>
+<div class="card">
+<div class="card-header"><strong> Detalhes da Identificação de Pagamento </strong> 
+<% cod_pag = cod_barra[19..43]  %>
+</div>
+    <div class="card-body">
+        <div class="table-responsive-sm">
+            <table class="table table-striped">      
+            <% if cod_pag[24].match(/3/)%>
+                <thead>
+                    <tr>
+                    <th class="center">Código da Localidade:</th>
+                    <th class="center">Matrícula do Imóvel:</th>
+                    <th class="center">Não utilizado (preencher com zero)</th>
+                    <th class="center">Mês e Ano de Referência da Conta (MMAAAA):</th>
+                    <th class="center">Dígito verificador da conta no módulo 10:</th>
+                    <th class="center">Tipo de Documento (no caso = 3)</th>
+                    </tr>
+                </thead>     
+                <tbody>                              
+                    <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
+                    <td class="center"><%= cod_pag[3..11] %></td>
+                    <td class="center">000</td>
+                    <td class="center"><%= cod_pag[14..19] %></td>
+                    <td class="center"><%= cod_pag[20]%></td>
+                    <td class="center"><%= cod_pag[24]%> - Conta </td>
+                </tbody>
+            <% elsif cod_pag[24].match (/[46]/) %>
+                <tbody>
+                    <tr>
+                        <th class="center">Código da Localidade:</th>
+                        <td class="center"><%= cod_pag[0..2] %></td>
+                    </tr>
 
-                                    <thead>
-                                      <tr>
-                                        <th class="center">Código da Localidade:</th>
-                                        <th class="center">Matrícula do Imóvel:</th>
-                                        <th class="center">Não utilizado (preencher com zero)</th>
-                                        <th class="center">Mês e Ano de Referência da Conta (MMAAAA):</th>
-                                        <th class="center">Dígito verificador da conta no módulo 10:</th>
-                                        <th class="center">Tipo de Documento (no caso = 3)</th>
-                                      </tr>
-                                    </thead>     
-                                    <tbody>                              
-                                      <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
-                                      <td class="center"><%= cod_pag[3..11] %></td>
-                                      <td class="center">000</td>
-                                      <td class="center"><%= cod_pag[14..19] %></td>
-                                      <td class="center"><%= cod_pag[20]%></td>
-                                      <td class="center"><%= cod_pag[24]%> - Conta </td>
-                                    </tbody>
-                                <% elsif cod_pag[24].match (/[46]/) %>
-                                    <tbody>
-                                        <tr>
-                                            <th class="center">Código da Localidade:</th>
-                                            <td class="center"><%= cod_pag[0..2] %></td>
-                                        </tr>
+                    <tr>
+                    <% if cod_pag[24] == '4' %>
+                        <th class="center">Matrícula do Imóvel:</th>
+                        <td class="center"><%= cod_pag[3..10] %></td>
+                    <% elsif cod_pag[24] == '6'  %>
+                        <th class="center">Código do Cliente:</th>
+                        <td class="center"><%= cod_pag[3..10] %></td>
+                    <% end %>
+                    </tr>
+                        
+                    <tr>
+                        <th class="center">Não utilizado (preencher com zero)</th>
+                        <td class="center">000</td>
+                    </tr>
 
-                                        <tr>
-                                        <% if cod_pag[24] == '4' %>
-                                            <th class="center">Matrícula do Imóvel:</th>
-                                            <td class="center"><%= cod_pag[3..10] %></td>
-                                        <% elsif cod_pag[24] == '6'  %>
-                                            <th class="center">Código do Cliente:</th>
-                                            <td class="center"><%= cod_pag[3..10] %></td>
-                                        <% end %>
-                                        </tr>
-                                          
-                                        <tr>
-                                            <th class="center">Não utilizado (preencher com zero)</th>
-                                            <td class="center">000</td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Código do Tipo do Débito:</th>
+                        <td class="center"><%= cod_pag[14..16] %></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Código do Tipo do Débito:</th>
-                                            <td class="center"><%= cod_pag[14..16] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Ano da Emissão da Guia de Pagamento (AAAA):</th>
+                        <td class="center"><%= cod_pag[17..20]%></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Ano da Emissão da Guia de Pagamento (AAAA):</th>
-                                            <td class="center"><%= cod_pag[17..20]%></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Não utilizado (preencher com zero)</th>
+                        <td class="center">000</td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Não utilizado (preencher com zero)</th>
-                                            <td class="center">000</td>
-                                        </tr>
+                    <tr>
+                        <th class="right">Tipo de Documento (no caso = 4 ou 6)</th>
+                        <td class="right"><%= cod_pag[24]%> - Guia de pagamento</td>
+                    </tr>                            
+                </tbody>
 
-                                        <tr>
-                                            <th class="right">Tipo de Documento (no caso = 4 ou 6)</th>
-                                            <td class="right"><%= cod_pag[24]%> - Guia de pagamento</td>
-                                        </tr>                            
-                                    </tbody>
+            <% elsif cod_pag[24].match(/5/) %>
+                <tbody>
+                    <tr>
+                        <th class="center">Código da Localidade:</th>
+                        <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
+                    </tr>
 
-                                <% elsif cod_pag[24].match(/5/) %>
-                                    <tbody>
-                                        <tr>
-                                            <th class="center">Código da Localidade:</th>
-                                            <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Matrícula do Imóvel:</th>
+                        <td class="center"><%= cod_pag[3..11] %></td>
+                    </tr>
+                        
+                    <tr>
+                        <th class="center">Sequencial do Documento de Cobrança</th>
+                        <td class="center"><%= cod_pag[13..20] %></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Matrícula do Imóvel:</th>
-                                            <td class="center"><%= cod_pag[3..11] %></td>
-                                        </tr>
-                                            
-                                        <tr>
-                                            <th class="center">Sequencial do Documento de Cobrança</th>
-                                            <td class="center"><%= cod_pag[13..20] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Código do Tipo do Documento:</th>
+                        <td class="center"><%= cod_pag[21..22] %></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Código do Tipo do Documento:</th>
-                                            <td class="center"><%= cod_pag[21..22] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="right">Tipo de Documento (no caso = 5)</th>
+                        <td class="right"><%= cod_pag[24]%> - Documento de cobrança</td>
+                    </tr>                            
+                </tbody>
 
-                                      <tr>
-                                            <th class="right">Tipo de Documento (no caso = 5)</th>
-                                            <td class="right"><%= cod_pag[24]%> - Documento de cobrança</td>
-                                        </tr>                            
-                                    </tbody>
+            <% elsif cod_pag[24].match(/8/) %>
+                <tbody>
+                    <tr>
+                        <th class="center">Não utilizado (preencher com zero)</th>
+                        <td class="center"><%= cod_pag[0..2] %></td>
+                    </tr>
 
-                                <% elsif cod_pag[24].match(/8/) %>
-                                    <tbody>
-                                        <tr>
-                                            <th class="center">Não utilizado (preencher com zero)</th>
-                                            <td class="center"><%= cod_pag[0..2] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Código do Cliente:</th>
+                        <td class="center"><%= cod_pag[3..10] %></td>
+                    </tr>
+                        
+                    <tr>
+                        <th class="center">Sequencial do Documento de Cobrança</th>
+                        <td class="center"><%= cod_pag[11..19] %></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Código do Cliente:</th>
-                                            <td class="center"><%= cod_pag[3..10] %></td>
-                                        </tr>
-                                            
-                                        <tr>
-                                            <th class="center">Sequencial do Documento de Cobrança</th>
-                                            <td class="center"><%= cod_pag[11..19] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Código do Tipo do Documento:</th>
+                        <td class="center"><%= cod_pag[20..21] %></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Código do Tipo do Documento:</th>
-                                            <td class="center"><%= cod_pag[20..21] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Não utilizado (preencher com zero)</th>
+                        <td class="center">00</td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Não utilizado (preencher com zero)</th>
-                                            <td class="center">00</td>
-                                        </tr>
+                    <tr>
+                        <th class="right">Tipo de Documento (no caso = 8)</th>
+                        <td class="right"><%= cod_pag[24]%> - Documento gerados para Cliente Responsável</td>
+                    </tr>                            
+                </tbody>
 
-                                        <tr>
-                                            <th class="right">Tipo de Documento (no caso = 8)</th>
-                                            <td class="right"><%= cod_pag[24]%> - Documento gerados para Cliente Responsável</td>
-                                        </tr>                            
-                                    </tbody>
+                
+            <% elsif cod_pag[24].match(/7/) %>
+                <tbody>
+                    <tr>
+                        <th class="center">Código do Cliente</th>
+                        <td class="center"><%= cod_pag[0..8] %></td>
+                    </tr>
 
-                                    
-                                <% elsif cod_pag[24].match(/7/) %>
-                                    <tbody>
-                                        <tr>
-                                            <th class="center">Código do Cliente</th>
-                                            <td class="center"><%= cod_pag[0..8] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Não utilizado (preencher com zero):</th>
+                        <td class="center"><%= cod_pag[3..10] %></td>
+                    </tr>
+                        
+                    <tr>
+                        <th class="center">Mês e Ano de Referência das Contas (MMAAAA)</th>
+                        <td class="center"><%= cod_pag[11..16] %></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Não utilizado (preencher com zero):</th>
-                                            <td class="center"><%= cod_pag[3..10] %></td>
-                                        </tr>
-                                            
-                                        <tr>
-                                            <th class="center">Mês e Ano de Referência das Contas (MMAAAA)</th>
-                                            <td class="center"><%= cod_pag[11..16] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Dígito verificador da conta no módulo 10:</th>
+                        <td class="center"><%= cod_pag[17] %></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Dígito verificador da conta no módulo 10:</th>
-                                            <td class="center"><%= cod_pag[17] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="center">Sequencial da Fatura do Cliente Responsável</th>
+                        <td class="center"><%= cod_pag[18..23] %></td>
+                    </tr>
 
-                                        <tr>
-                                            <th class="center">Sequencial da Fatura do Cliente Responsável</th>
-                                            <td class="center"><%= cod_pag[18..23] %></td>
-                                        </tr>
+                    <tr>
+                        <th class="right">Tipo de Documento (no caso = 7)</th>
+                        <td class="right"><%= cod_pag[24]%> - Fatura do Cliente Responsável</td>
+                    </tr>                            
+                </tbody>
 
-                                        <tr>
-                                            <th class="right">Tipo de Documento (no caso = 7)</th>
-                                            <td class="right"><%= cod_pag[24]%> - Fatura do Cliente Responsável</td>
-                                        </tr>                            
-                                    </tbody>
+            <% elsif cod_pag[24].match(/[19]/) %>
+                <tbody>
+                    <tr>
+                        <th class="center">Código da Localidade</th>
+                        <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
+                    </tr>
 
-                                <% elsif cod_pag[24].match(/[19]/) %>
-                                    <tbody>
-                                        <tr>
-                                            <th class="center">Código da Localidade</th>
-                                            <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
-                                        </tr>
+                    <tr>
+                    <% if cod_pag[24] == '1' %>
+                        <th class="center">Matrícula do Imóvel:</th>
+                        <td class="center"><%= cod_pag[3..11] %></td>
+                    <% elsif cod_pag[24] == '9'  %>
+                        <th class="center">Código do Cliente:</th>
+                        <td class="center"><%= cod_pag[3..10] %></td>
+                    <% end %>
+                    </tr>
+                        
+                    <tr>
+                        <th class="center">Identificador da guia de pagamento:</th>
+                        <td class="center"><%= cod_pag[12..20] %></td>
+                    </tr>
+                        
+                    <%# <tr>
+                        <th class="center">Campo não utilizado</th>
+                        <td class="center">XXX</td>
+                    </tr> %>
 
-                                        <tr>
-                                        <% if cod_pag[24] == '1' %>
-                                            <th class="center">Matrícula do Imóvel:</th>
-                                            <td class="center"><%= cod_pag[3..11] %></td>
-                                        <% elsif cod_pag[24] == '9'  %>
-                                            <th class="center">Código do Cliente:</th>
-                                            <td class="center"><%= cod_pag[3..10] %></td>
-                                        <% end %>
-                                        </tr>
-                                          
-                                        <tr>
-                                            <th class="center">Identificador da guia de pagamento:</th>
-                                            <td class="center"><%= cod_pag[12..20] %></td>
-                                        </tr>
-                                            
-                                        <%# <tr>
-                                            <th class="center">Campo não utilizado</th>
-                                            <td class="center">XXX</td>
-                                        </tr> %>
+                    <tr>
+                        <th class="center">Tipo de Documento (no caso = 1 ou 9)</th>
+                        <td class="center"><%= cod_pag[24]%> - Guia de pagamento com identificação </td>
+                    </tr>                            
+                </tbody>                         
+            <% end %>
+            </table>
+        </div>
+    </div>
+</div>
 
-                                        <tr>
-                                            <th class="center">Tipo de Documento (no caso = 1 ou 9)</th>
-                                            <td class="center"><%= cod_pag[24]%> - Guia de pagamento com identificação </td>
-                                        </tr>                            
-                                    </tbody>                         
-                                <% end %>
-                                </table>
-                            </div>
-                        </div>
-            </div>
+<%= link_to 'Voltar', arquivos_path, class: 'btn btn-sm btn-info' %><br><br>
+<%= link_to "DOWNLOAD PDF", arquivo_path(cod_barra, format: :pdf) %>
