@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :conta do
     get 'cod_barra/index'
-    get 'display/index'
+    resources :display, only: %i[index show]
     get 'search/index'
   end
   
