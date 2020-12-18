@@ -10,7 +10,6 @@
   </thead>
     <tbody class= "text-primary">
       <% @arquivo.documento.each do |doc| %>
-      <% campos = extrair_cod_barra_avulso(doc)  %>
         <tr>
           <td><%= link_to doc.filename, rails_blob_path(doc, disposition: :attachment) %></td>
 
