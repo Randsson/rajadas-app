@@ -120,7 +120,11 @@
 
                                         <tr>
                                             <th class="center">Matrícula do Imóvel:</th>
-                                            <td class="center"><%= cod_pag[3..11] %></td>
+                                            <% if cod_pag[0..2] == '820' || cod_pag[0..2] == '840' %>
+                                                <td class="center"><%= cod_pag[3..11] %></td>
+                                            <% else %>
+                                                <td class="center"><%= cod_pag[3..12] %></td>  
+                                            <% end %>
                                         </tr>
 
                                          <tr>
@@ -130,7 +134,11 @@
 
                                         <tr>
                                             <th class="center">Mês e Ano de Referência da Conta (MMAAAA):</th>
-                                            <td class="center"><%= cod_pag[14..19] %></td>
+                                            <% if cod_pag[0..2] == '820' %>
+                                                <td class="center"><%= cod_pag[11..16] %></td>
+                                            <% else %>
+                                                <td class="center"><%= cod_pag[14..19] %></td>
+                                            <% end %>
                                         </tr>
 
                                         <tr>

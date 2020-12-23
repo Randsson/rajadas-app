@@ -23,12 +23,12 @@
               <% end %>
             </td>
             <td><%= barra[19..21] %></td>
-            <% if barra[19..21] == '820' || barra[19..21] == '840' %>
+            <% if barra[19..21].match(/8\d{2}/) %>
               <td class="center"><%= barra[22..29] %></td>
             <% else %>
               <td class="center"><%= barra[22..30] %></td>  
             <% end %>
-            <td class="center"><%= barra[4..14].insert(-3, ',').sub!(/^0+/,'')  %></td>
+            <td class="center"><%= barra[4..14].insert(-3, ',').sub(/^0+/,'')  %></td>
             <% if barra[19..21] == '820' %>
               <td class="center"><%= barra[30..35] %></td>
             <% else %>

@@ -66,6 +66,6 @@
  <% if @tamanho_barra.first.size < 50 %>
   <%= render 'show_barras', arquivo: @arquivo %>
 <% else %>
-  <%= render 'show_rajadas', arquivo: @arquivo %>
+  <%= render partial: 'show_rajadas', locals: {arquivo: @arquivo, tamanho_barra: @tamanho_barra} %>
  <% end %>
     
