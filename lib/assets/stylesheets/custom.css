@@ -1508,6 +1508,10 @@ footer {
   padding: 10px 20px;
   display: block; }
 
+.footer-index{
+  background-color: #000;
+}
+
 .nav-sm footer {
   margin-left: 70px; }
 
@@ -4968,3 +4972,5 @@ ul.notifications {
 
 .calendar-exibit .calendar-table {
   padding: 0 0 4px 0; }
+
+  

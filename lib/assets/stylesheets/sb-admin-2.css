@@ -10824,9 +10824,10 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  /* background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800"); */
+  background: url("Casal com codigo de barras 02.png");
   background-position: center;
-  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .bg-register-image {
@@ -11234,9 +11235,12 @@ footer.sticky-footer {
   flex-shrink: 0;
 }
 
+footer.footer-index{
+  color: #fff;
+}
 footer.sticky-footer .copyright {
   line-height: 1;
-  font-size: 0.8rem;
+  font-size: 20px;
 }
 
 body.sidebar-toggled footer.sticky-footer {
