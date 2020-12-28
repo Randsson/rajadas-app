@@ -31,10 +31,6 @@
         <%= link_to arquivo_path(arquivo), method: :delete, class:"btn btn-danger btn-sm ", data: {confirm: "Excluir #{arquivo.title}?"} do %>
           <i class="fas fa-minus"></i> 
         <% end %>
-
-         <%= link_to arquivo_path(arquivo), class:"btn btn-success btn-sm  " do %>
-            <i class="fas fa-folder-open"></i>
-        <% end %>
         </td>
       </tr>
     <% end %>
@@ -43,7 +39,7 @@
   <%= link_to new_arquivo_path, class:"btn btn-outline-primary" do %>
     <i class="fas fa-file-alt"></i> Add arquivo
   <% end %>
-  <%= link_to destroy_user_session_path, method: :delete, class:"btn btn-outline-primary" do %>
-    <i class="fas fa-sign-out-alt"></i> Logout
+  <%= link_to destroy_user_session_path, method: :delete, class:"btn btn-outline-success" do %>
+    <i class="fas fa-sign-out-alt"></i> Sair
   <% end %>
 </div>
