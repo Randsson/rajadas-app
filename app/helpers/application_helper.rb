@@ -55,13 +55,21 @@ module ApplicationHelper
     line unless line[30..38].match(/\d{2}20\d{2}/)
   end
 
-  def cod_barra_campos
+  def cod_rajada_campos
     campos = [
       ['Todos...', 1],
       ['Tipo do documento', 2],
       ['Código da Localidade', 3],
       ['Forma de Arrecadação', 4],
       ['NSR', 5],
+      ['Data Inválida', 6]
+    ]
+  end
+
+  def cod_barra_campos
+    campos = [
+      ['Todos...', 1],
+      ['Código da Localidade', 3],
       ['Data Inválida', 6]
     ]
   end
