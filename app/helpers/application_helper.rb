@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def extrair_path_arquivo(arquivo)
     arquivo.documento.reduce([]) do |paths, doc|
       paths << ActiveStorage::Blob.service.path_for(doc.key)
@@ -27,6 +28,12 @@ module ApplicationHelper
       doc = File.readlines(path)
       valores << doc[-1][7..23]
     end
+  end
+
+  def extrair_header(arquivo)
+    paths = extrair_path_arquivo(arquivo)
+    header = File.readlines(paths)
+    header[0]
   end
 
   def number_to_currency_br(number)
