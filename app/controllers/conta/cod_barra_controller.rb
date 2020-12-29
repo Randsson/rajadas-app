@@ -7,7 +7,6 @@ class Conta::CodBarraController < ApplicationController
     @formas_pagamentos = { '1' => 'Dinheiro', '2' => 'Cheque', '3' => 'Nao identificado' }
     canais_de_recebimento
     localidades
-    @id = params[:arquivo]
   end
 
   private
