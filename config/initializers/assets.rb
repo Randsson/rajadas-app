@@ -16,6 +16,5 @@ Rails.application.config.assets.precompile += %w( arquivos.js arquivos.css )
 # lib/assets
 Rails.application.config.assets.precompile += %w( 
   sb-admin-2.js sb-admin-2.css 
-  custom.js custom.css
   logo_casal_azul_400x400.png
   Casal com codigo de barras 02.png)
