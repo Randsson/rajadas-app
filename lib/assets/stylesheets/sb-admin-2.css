@@ -1501,6 +1501,13 @@ pre code {
   border-bottom: 2px solid #e3e6f0;
 }
 
+.table .tbody tr th{
+  width: 605px;
+}
+/* 
+.table .tbody tr td{
+} */
+
 .table tbody + tbody {
   border-top: 2px solid #e3e6f0;
 }
