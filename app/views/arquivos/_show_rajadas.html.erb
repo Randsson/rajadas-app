@@ -6,40 +6,73 @@
             <span>Arquivos</span></a>
         <% end %>
         <%= link_to edit_arquivo_path(@arquivo), class:"btn btn-info my-2 my-sm-0" do %>
-          <i class="fas fa-file-signature"></i>Editar
+          <i class="fas fa-file-signature"></i> Editar
         <% end %>
         <%= link_to arquivo_path(@arquivo, format: :pdf), class:"btn btn-success" do%>
-          <i class="fas fa-file-pdf"></i>Baixar PDF
+          <i class="fas fa-file-pdf"></i> Baixar PDF
         <% end %>
       </span>
   <table class="table table-striped table-bordered">
     <thead class="bg-gradient-primary text-white">
-      <th>Arquivo</th>
+      <th> Arquivo</th>
       <th> Localidade</th>
       <th> Matricula</th>
       <th> Valor</th>
-      <th> mes/ano referencia</th>
+      <th> Mes/ano referencia</th>
     </thead>
     <tbody class= "text-primary">
       <% @arquivo.documento.each do |doc| %>
         <tr>
           <td><%= link_to doc.filename, rails_blob_path(doc, disposition: :attachment) %></td>
-
-          <% extrair_cod_barra(doc).each do |cod_barra| %>
-           <% barra = cod_barra[37..80]  %> 
-          <tr>
-            <td><p><%= link_to cod_barra, conta_display_index_path(cod_barra) %></p></td>
-            <td><%= barra[19..21] %></td>
-            <% if barra[19..21] == '820' || barra[19..21] == '840' %>
-              <td class="center"><%= barra[22..29] %></td>
-            <% else %>
-              <td class="center"><%= barra[22..30] %></td>  
+          
+          <% extrair_cod_barra(doc).each do |cod_barras| %>
+            <% cod_barra = cod_barras[37..80]  %> 
+            <% head = extrair_header(doc)  %>
+            <tr>
+            <td><p><%= link_to cod_barras, conta_display_index_path(cod_barras, :head => head) %></p></td>
+            
+            <!-- Localidade  não tem: 7,05,14, 94, 90(3 && cod_barra[19..20].match(/82/)) -->
+            <% if  cod_barra[43].match(/3/) && cod_barra[19..20].match(/82/) ||
+                                              cod_barra[19..20].match(/82|84|05|90|94/) %>
+              <td>Não se aplica</td>
+            <% elsif cod_barra[43].match(/[1345689]/) %>
+              <td ><%= cod_barra[19..21]%></td>
+            <%elsif cod_barra[19..20].match(/15/)%>
+              <td><%= cod_barra[35..37]%></td>
+            <%elsif cod_barra[19..20].match(/35|36|37/)%>
+              <td><%= cod_barra[21..23]%></td>
             <% end %>
-            <td class="center"><%= barra[4..14].insert(-3, ',').sub!(/^0+/,'')  %></td>
-            <% if barra[19..21] == '820' %>
-              <td class="center"><%= barra[30..35] %></td>
+
+            <!-- Matricula não tem: 6, 7, 8, 9, 37  cod_barra[32].match(/0/)  -->
+            <% if  cod_barra[43].match(/3/) && cod_barra[19..20].match(/82/) ||
+                                              cod_barra[19..20].match(/05|82|84|90|/) %>
+              <td><%= cod_barra[21..29] %></td>
+            <% elsif cod_barra[43].match(/[34]/) && cod_barra[32].match(/0/)%>
+              <td><%= cod_barra[22..29] %></td>
+            <% elsif cod_barra[43].match(/[15]/) && cod_barra[42].match(/0/)%>
+              <td><%= cod_barra[22..29] %></td>
+            <% elsif cod_barra[43].match(/[1345]/)%>
+              <td><%= cod_barra[22..30] %></td>
+            <% elsif cod_barra[19..20].match(/91|15/) %>
+              <td><%= cod_barra[21..28] %></td>
+            <% elsif cod_barra[19..20].match(/14/) %>
+              <td><%= cod_barra[23..31]%></td>
+            <%elsif cod_barra[19..20].match(/35|36/)%>
+              <td><%= cod_barra[24..31]%></td>
+            <%elsif cod_barra[19..20].match(/94/)%>
+              <td><%= cod_barra[33..41]%></td>
+            <% elsif cod_barra[43].match(/[6789]/) || cod_barra[19..20].match(/37/)%>
+              <td>Não se aplica</td>
+            <% end %>
+
+            <!-- Valor -->
+            <td><%= cod_barra[4..14].insert(-3, ',').sub!(/^0+/,'')  %></td>
+            
+            <!-- Mes/ano referencia -->
+            <% if cod_barra[19..21] == '820' %>
+              <td><%= cod_barra[30..35].insert(-5,'/') %></td>
             <% else %>
-              <td class="center"><%= barra[33..38] %></td>
+              <td><%= cod_barra[33..38].insert(-5,'/') %></td>
             <% end %>
           <% end %>
           </tr>

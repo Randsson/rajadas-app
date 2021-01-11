@@ -31,9 +31,9 @@ module ApplicationHelper
   end
 
   def extrair_header(arquivo)
-    paths = extrair_path_arquivo(arquivo)
-    header = File.readlines(paths)
-    header[0]
+    path = ActiveStorage::Blob.service.path_for(arquivo.key)
+    doc = File.readlines(path)
+    doc[0]
   end
 
   def number_to_currency_br(number)
