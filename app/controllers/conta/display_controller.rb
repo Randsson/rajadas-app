@@ -1,24 +1,23 @@
 class Conta::DisplayController < ApplicationController
   layout 'files_panel'
-  before_action :set_barra, only: %w[show]
+  # before_action :set_barra, only: %i[show]
 
   def index
     @cod_leitura = params[:format]
     @formas_pagamentos = { '1' => 'Dinheiro', '2' => 'Cheque', '3' => 'Nao identificado' }
     canais_de_recebimento
     localidades
+    @head = params[:head].strip
   end
 
   def show
+    @cod_leitura = params[:format]
+    @formas_pagamentos = { '1' => 'Dinheiro', '2' => 'Cheque', '3' => 'Nao identificado' }
+    canais_de_recebimento
+    localidades
   end
-  
-
 
   private
-
-  def set_barra
-    @barra = params[:id].strip
-  end
  
   def canais_de_recebimento
     @canais_de_recebimento = {
