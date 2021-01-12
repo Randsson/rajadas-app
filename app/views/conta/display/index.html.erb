@@ -105,7 +105,7 @@
               <%elsif cod_barra[43].match(/3/)%>
                 <tr>
                   <th >Código da Localidade:</th>
-                  <td ><%= cod_barra[19..21]%></td>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
                 </tr>
                 <% if cod_barra[32].match(/0/) %>
                   <tr>
@@ -141,7 +141,7 @@
               <%elsif cod_barra[43].match(/1/)%>
                 <tr>
                   <th >Código da Localidade:</th>
-                  <td ><%= cod_barra[19..21]%></td>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
                 </tr>
                 <% if cod_barra[42].match(/0/) %>
                   <tr>
@@ -180,7 +180,7 @@
               <%elsif cod_barra[43].match(/4/)%>
                 <tr>
                   <th >Código da Localidade:</th>
-                  <td ><%= cod_barra[19..21]%></td>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
                 </tr>
                 <% if cod_barra[32].match(/0/) %>
                   <tr>
@@ -220,7 +220,7 @@
               <%elsif cod_barra[43].match(/5/)%>
                 <tr>
                   <th >Código da Localidade:</th>
-                  <td ><%= cod_barra[19..21]%></td>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
                 </tr>
                 <% if cod_barra[42].match(/0/) %>
                   <tr>
@@ -264,7 +264,7 @@
               <%elsif cod_barra[43].match(/6/)%>
                 <tr>
                   <th >Código da Localidade:</th>
-                  <td ><%= cod_barra[19..21]%></td>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
                 </tr>
                 <tr>
                   <th >Número de Identificação do Cliente:</th>
@@ -318,7 +318,7 @@
               <%elsif cod_barra[43].match(/8/)%>
                 <tr>
                   <th >Código da Localidade:</th>
-                  <td ><%= cod_barra[19..21]%></td>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
                 </tr>
                 <tr>
                   <th >Código do Cliente:</th>
@@ -343,7 +343,7 @@
               <%elsif cod_barra[43].match(/9/)%>
                 <tr>
                   <th >Código da Localidade:</th>
-                  <td ><%= cod_barra[19..21]%></td>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
                 </tr>
                 <% if cod_barra[42].match(/0/) %>
                   <tr>
@@ -481,7 +481,7 @@
               <%elsif cod_barra[19..20].match(/35|36/)%>
                 <tr>
                   <th class="center">Código de Localidade:</th>
-                  <td class="center"><%= cod_barra[21..23]%></td>
+                  <td ><%= cod_barra[21..23]%> - <%= @localidades["#{cod_barra[21..23]}"]%></td>
                 </tr>
                 <tr>
                   <th class="center">Matrícula do Imóvel:</th>
@@ -535,7 +535,7 @@
                 </tr>
                 <tr>
                   <th class="center">Código da Localidade:</th>
-                  <td class="center"><%= cod_barra[35..37]%></td>
+                  <td ><%= cod_barra[35..37]%> - <%= @localidades["#{cod_barra[35..37]}"]%></td>
                 </tr>
                 <tr>
                   <th class="center">Tipo de Serviço:</th>
