@@ -81,7 +81,8 @@
     <%= javascript_include_tag 'arquivos'%>
     <%= javascript_include_tag 'application'%>
 
-    <% if notice %>
+
+<!--    <% if notice %>
         <%= javascript_tag do %>
             $.bootstrapGrowl( "<%=notice%>" , {
                 ele: 'body', // which element to append to
@@ -94,6 +95,6 @@
                 stackup_spacing: 10 // spacing between consecutively stacked growls.
             });
         <% end %>
-    <% end %>
+    <% end %> -->
 </body>
 </html>
