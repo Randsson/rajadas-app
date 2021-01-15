@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
           <table class="table table-striped">
-            <tbody>
+            <tbody class="tbody">
               <tr>
                 <th class="center">Código do convênio:</th>
                 <td class="center"><%= @head[2..21]%></td>
@@ -129,6 +129,10 @@
                 <tr>
                   <th class="center">Mês/ano de Referência:</th>
                   <td class="center"><%= cod_barra[33..38].insert(2,'/')%></td>
+                </tr>
+                <tr>
+                  <th class="center">Digito Verificador da Conta no Módulo 10:</th>
+                  <td class="center"><%= cod_barra[39]%></td>
                 </tr>
                 <tr>
                   <th class="center">Não Utilizado:</th>
@@ -452,9 +456,9 @@
                 <tr>
                   <th class="center">Tipo de Pagamento:</th>
                   <% if cod_barra[19..20].match(/90/) %>
-                    <td><%= cod_barra[19..20]%> - Aviso de Corte Legado</td>
+                    <td><%= cod_barra[19..20]%> - Aviso de Corte (Legado)</td>
                   <% else %>
-                    <td><%= cod_barra[19..20]%> - Aviso de Débito Legado</td>
+                    <td><%= cod_barra[19..20]%> - Aviso de Débito (Legado)</td>
                   <% end %>
                 </tr>
               <%elsif cod_barra[19..20].match(/14/)%>
@@ -531,7 +535,7 @@
                 </tr>
                 <tr>
                   <th class="center">Mês/Ano Conta:</th>
-                  <td class="center"><%= cod_barra[29..34]%></td>
+                  <td class="center"><%= cod_barra[29..34].insert(2,'/')%></td>
                 </tr>
                 <tr>
                   <th class="center">Código da Localidade:</th>

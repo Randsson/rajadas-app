@@ -5,13 +5,13 @@
     <% end %>
 </span>
 <div class="card">
-    <div class="card-header"><strong> Detalhes do Código de Barra: <%=@cod_leitura  %></strong></div>
+    <div class="card-header"><strong> Detalhes do Código de Barra</strong></div>
     <% cod_barra = @cod_leitura  %>
         
     <div class="card-body">
         <div class="table-responsive-sm">
             <table class="table table-striped">
-                <tbody>
+                <tbody class="tbody">
                     <tr>
                         <th class="center">Produto (valor fixo = 8):</th>
                         <td class="center"><%= cod_barra[0] %></td>
@@ -47,207 +47,488 @@
 </div>
 
 <div class="card">
-    <div class="card-header"><strong> Detalhes da Identificação de Pagamento: <%= cod_barra[19..43] %> </strong> <% cod_pag = cod_barra[19..43]  %></div>
-    <div class="card-body">
-        <div class="table-responsive-sm">
-            <table class="table table-striped">
-                <tbody>
-                <% if cod_pag[24].match(/3/)%>
-                        <tr>
-                            <th class="center">Código da Localidade:</th>
-                            <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
-                        </tr>
-                        <tr>
-                            <th class="center">Matrícula do Imóvel:</th>
-                            <% if cod_pag[0..2].match(/8\d{2}/) %>
-                                <td class="center"><%= cod_pag[3..10] %></td>
-                            <% else %>
-                                <td class="center"><%= cod_pag[3..11] %></td>  
-                            <% end %>
-                        </tr>
-                            <tr>
-                            <th class="center">Não utilizado (preencher com zero)</th>
-                            <td class="center">000</td>
-                        </tr>
-                        <tr>
-                            <th class="center">Mês e Ano de Referência da Conta (MMAAAA):</th>
-                            <% if cod_pag[0..2] == '820' %>
-                                <td class="center"><%= cod_pag[11..16].insert(-5, '/') %></td>
-                            <% else %>
-                                <td class="center"><%= cod_pag[14..19].insert(-5, '/')  %></td>
-                            <% end %>
-                        </tr>
-                        <tr>
-                            <th class="center">Dígito verificador da conta no módulo 10:</th>
-                            <td class="center"><%= cod_pag[20]%></td>
-                        </tr>
-                        <tr>
-                            <th class="center">Tipo de Documento (no caso = 3)</th>
-                            <td class="center"><%= cod_pag[24]%> - Conta </td>
-                        </tr>                            
-                <% elsif cod_pag[24].match (/[46]/) %>
-                        <tr>
-                            <th class="center">Código da Localidade:</th>
-                            <td class="center"><%= cod_pag[0..2] %></td>
-                        </tr>
-
-                        <tr>
-                        <% if cod_pag[24] == '4' %>
-                            <th class="center">Matrícula do Imóvel:</th>
-                            <td class="center"><%= cod_pag[3..10] %></td>
-                        <% elsif cod_pag[24] == '6'  %>
-                            <th class="center">Código do Cliente:</th>
-                            <td class="center"><%= cod_pag[3..10] %></td>
-                        <% end %>
-                        </tr>
-                            
-                        <tr>
-                            <th class="center">Não utilizado (preencher com zero)</th>
-                            <td class="center">000</td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Código do Tipo do Débito:</th>
-                            <td class="center"><%= cod_pag[14..16] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Ano da Emissão da Guia de Pagamento (AAAA):</th>
-                            <td class="center"><%= cod_pag[17..20]%></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Não utilizado (preencher com zero)</th>
-                            <td class="center">000</td>
-                        </tr>
-
-                        <tr>
-                            <th class="right">Tipo de Documento (no caso = 4 ou 6)</th>
-                            <td class="right"><%= cod_pag[24]%> - Guia de pagamento</td>
-                        </tr>                            
-
-                <% elsif cod_pag[24].match(/5/) %>
-                        <tr>
-                            <th class="center">Código da Localidade:</th>
-                            <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Matrícula do Imóvel:</th>
-                            <td class="center"><%= cod_pag[3..11] %></td>
-                        </tr>
-                            
-                        <tr>
-                            <th class="center">Sequencial do Documento de Cobrança</th>
-                            <td class="center"><%= cod_pag[13..20] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Código do Tipo do Documento:</th>
-                            <td class="center"><%= cod_pag[21..22] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="right">Tipo de Documento (no caso = 5)</th>
-                            <td class="right"><%= cod_pag[24]%> - Documento de cobrança</td>
-                        </tr>                            
-
-                <% elsif cod_pag[24].match(/8/) %>
-                        <tr>
-                            <th class="center">Não utilizado (preencher com zero)</th>
-                            <td class="center"><%= cod_pag[0..2] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Código do Cliente:</th>
-                            <td class="center"><%= cod_pag[3..10] %></td>
-                        </tr>
-                            
-                        <tr>
-                            <th class="center">Sequencial do Documento de Cobrança</th>
-                            <td class="center"><%= cod_pag[11..19] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Código do Tipo do Documento:</th>
-                            <td class="center"><%= cod_pag[20..21] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Não utilizado (preencher com zero)</th>
-                            <td class="center">00</td>
-                        </tr>
-
-                        <tr>
-                            <th class="right">Tipo de Documento (no caso = 8)</th>
-                            <td class="right"><%= cod_pag[24]%> - Documento gerados para Cliente Responsável</td>
-                        </tr>                            
-
-                    
-                <% elsif cod_pag[24].match(/7/) %>
-                        <tr>
-                            <th class="center">Código do Cliente</th>
-                            <td class="center"><%= cod_pag[0..8] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Não utilizado (preencher com zero):</th>
-                            <td class="center"><%= cod_pag[3..10] %></td>
-                        </tr>
-                            
-                        <tr>
-                            <th class="center">Mês e Ano de Referência das Contas (MMAAAA)</th>
-                            <td class="center"><%= cod_pag[11..16] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Dígito verificador da conta no módulo 10:</th>
-                            <td class="center"><%= cod_pag[17] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="center">Sequencial da Fatura do Cliente Responsável</th>
-                            <td class="center"><%= cod_pag[18..23] %></td>
-                        </tr>
-
-                        <tr>
-                            <th class="right">Tipo de Documento (no caso = 7)</th>
-                            <td class="right"><%= cod_pag[24]%> - Fatura do Cliente Responsável</td>
-                        </tr>                            
-
-                <% elsif cod_pag[24].match(/[19]/) %>
-                        <tr>
-                            <th class="center">Código da Localidade</th>
-                            <td class="center"><%= cod_pag[0..2] %> - <%=  @localidades["#{cod_pag[0..2]}"] %></b></td>
-                        </tr>
-
-                        <tr>
-                        <% if cod_pag[24] == '1' %>
-                            <th class="center">Matrícula do Imóvel:</th>
-                            <td class="center"><%= cod_pag[3..11] %></td>
-                        <% elsif cod_pag[24] == '9'  %>
-                            <th class="center">Código do Cliente:</th>
-                            <td class="center"><%= cod_pag[3..10] %></td>
-                        <% end %>
-                        </tr>
-                            
-                        <tr>
-                            <th class="center">Identificador da guia de pagamento:</th>
-                            <td class="center"><%= cod_pag[12..20] %></td>
-                        </tr>
-                            
-                        <%# <tr>
-                            <th class="center">Campo não utilizado</th>
-                            <td class="center">XXX</td>
-                        </tr> %>
-
-                        <tr>
-                            <th class="center">Tipo de Documento (no caso = 1 ou 9)</th>
-                            <td class="center"><%= cod_pag[24]%> - Guia de pagamento com identificação </td>
-                        </tr>                            
+        <div class="card-header"><strong>Detalhes da Identificação do Pagamento</strong></div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <tbody class="tbody">
+              <%if cod_barra[43].match(/3/) && cod_barra[19..20].match(/82/) || cod_barra[19..20].match(/82/) %>
+                <tr>
+                  <th class="center">Código do convênio:</th>
+                  <td class="center"><%= cod_barra[19..20]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Matrícula do Imóvel:</th>
+                  <td class="center"><%= cod_barra[21..29]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Mês/Ano de Referência:</th>
+                  <td class="center"><%= cod_barra[30..35].insert(2,'/')%></td>
+                </tr>
+                <tr>
+                  <th class="center">Dígito Verificador da Conta:</th>
+                  <td class="center"><%= cod_barra[36]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[37..42]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[43]%> - Conta (Legado)</td>
+                </tr>
+              <%elsif cod_barra[43].match(/3/)%>
+                <tr>
+                  <th >Código da Localidade:</th>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
+                </tr>
+                <% if cod_barra[32].match(/0/) %>
+                  <tr>
+                    <th >Matrícula do Imóvel:</th>
+                    <td ><%= cod_barra[22..29]%></td>
+                  </tr>
+                  <tr>
+                    <th class="center">Não Utilizado:</th>
+                    <td class="center"><%= cod_barra[30..32]%></td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <th >Matrícula do Imóvel:</th>
+                    <td ><%= cod_barra[22..30]%></td>
+                  </tr>
+                  <tr>
+                    <th class="center">Não Utilizado:</th>
+                    <td class="center"><%= cod_barra[31..32]%></td>
+                  </tr>
                 <% end %>
-                </tbody>      
-            </table>
+                <tr>
+                  <th class="center">Mês/ano de Referência:</th>
+                  <td class="center"><%= cod_barra[33..38].insert(2,'/')%></td>
+                </tr>
+                <tr>
+                  <th class="center">Digito Verificador da Conta no Módulo 10:</th>
+                  <td class="center"><%= cod_barra[39]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[40..42]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[43]%> - Conta</td>
+                </tr>
+              <%elsif cod_barra[43].match(/1/)%>
+                <tr>
+                  <th >Código da Localidade:</th>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
+                </tr>
+                <% if cod_barra[42].match(/0/) %>
+                  <tr>
+                    <th >Matrícula do Imóvel:</th>
+                    <td ><%= cod_barra[22..29]%></td>
+                  </tr>
+                  <tr>
+                    <th >Identificador da Guia de Pagamento:</th>
+                    <td ><%= cod_barra[30..38]%></td>
+                  </tr>
+                  <tr>
+                    <th class="center">Não Utilizado:</th>
+                    <td class="center"><%= cod_barra[39..42]%></td>
+                  </tr>
+                  <tr>
+                    <th class="center">Tipo de Pagamento:</th>
+                    <td class="center"><%= cod_barra[43]%> - Guia de Pagamento com Identificação de Matricula</td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <th >Matrícula do Imóvel:</th>
+                    <td ><%= cod_barra[22..30]%></td>
+                  </tr>
+                  <tr>
+                    <th >Identificador da Guia de Pagamento:</th>
+                    <td ><%= cod_barra[31..39]%></td>
+                  </tr>
+                  <tr>
+                    <th class="center">Não Utilizado:</th>
+                    <td class="center"><%= cod_barra[40..42]%></td>
+                  </tr>
+                  <tr>
+                    <th class="center">Tipo de Pagamento:</th>
+                    <td class="center"><%= cod_barra[43]%> - Guia de Pagamento com Identificação de Matricula</td>
+                <% end %>
+              <%elsif cod_barra[43].match(/4/)%>
+                <tr>
+                  <th >Código da Localidade:</th>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
+                </tr>
+                <% if cod_barra[32].match(/0/) %>
+                  <tr>
+                    <th >Matrícula do Imóvel:</th>
+                    <td ><%= cod_barra[22..29]%></td>
+                  </tr>
+                  <tr>
+                    <th >Identificador da Guia de Pagamento:</th>
+                    <td ><%= cod_barra[30..32]%></td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <th >Matrícula do Imóvel:</th>
+                    <td ><%= cod_barra[22..30]%></td>
+                  </tr>
+                  <tr>
+                    <th >Identificador da Guia de Pagamento:</th>
+                    <td ><%= cod_barra[31..32]%></td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <th class="center">Código do Tipo do Débito:</th>
+                  <td class="center"><%= cod_barra[33..35]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Ano da Emissão da Guia de Pagamento:</th>
+                  <td class="center"><%= cod_barra[36..39]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[40..42]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[43]%> - Guia de Pagamento</td>
+                </tr>
+              <%elsif cod_barra[43].match(/5/)%>
+                <tr>
+                  <th >Código da Localidade:</th>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
+                </tr>
+                <% if cod_barra[42].match(/0/) %>
+                  <tr>
+                    <th >Matrícula do Imóvel:</th>
+                    <td ><%= cod_barra[22..29]%></td>
+                  </tr>
+                  <tr>
+                    <th>Sequencial do Documento de Cobrança:</th>
+                    <td><%= cod_barra[30..38]%></td>
+                  </tr>
+                  <tr>
+                    <th>Código do Tipo de Documento:</th>
+                    <td><%= cod_barra[39..40]%></td>
+                  </tr>
+                  <tr>
+                    <th>Não Utilizado:</th>
+                    <td><%= cod_barra[41..42]%></td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <th >Matrícula do Imóvel:</th>
+                    <td ><%= cod_barra[22..30]%></td>
+                  </tr>
+                  <tr>
+                    <th>Sequencial do Documento de Cobrança:</th>
+                    <td><%= cod_barra[31..39]%></td>
+                  </tr>
+                  <tr>
+                    <th>Código do Tipo de Documento:</th>
+                    <td><%= cod_barra[40..41]%></td>
+                  </tr>
+                  <tr>
+                    <th>Não Utilizado:</th>
+                    <td><%= cod_barra[42]%></td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[43]%> - Documento de Cobrança</td>
+                </tr>
+              <%elsif cod_barra[43].match(/6/)%>
+                <tr>
+                  <th >Código da Localidade:</th>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
+                </tr>
+                <tr>
+                  <th >Número de Identificação do Cliente:</th>
+                  <td ><%= cod_barra[22..29]%></td>
+                </tr>
+                <tr>
+                  <th>Não Utilizado</th>
+                  <td><%= cod_barra[30..32]%></td>
+                </tr>
+                <tr>
+                  <th>Código do Tipo de Débito:</th>
+                  <td><%= cod_barra[33..35]%></td>
+                </tr>
+                <tr>
+                  <th>Ano da Emissão da Guia de Pagamento:</th>
+                  <td><%= cod_barra[36..39]%></td>
+                </tr>
+                <tr>
+                  <th>Não Utilizado:</th>
+                  <td><%= cod_barra[40..42]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[43]%> - Guia de Pagamento de Cliente</td>
+                </tr>
+              <%elsif cod_barra[43].match(/7/)%>
+                <tr>
+                  <th >Código do Cliente Responsável:</th>
+                  <td ><%= cod_barra[19..27]%></td>
+                </tr>
+                <tr>
+                  <th >Não Utilizado:</th>
+                  <td ><%= cod_barra[28..29]%></td>
+                </tr>
+                <tr>
+                  <th>Mês e Ano de Referência da Conta</th>
+                  <td><%= cod_barra[30..35].insert(2,'/')%></td>
+                </tr>
+                <tr>
+                  <th>Dígito Verificador da Conta no Módulo 10:</th>
+                  <td><%= cod_barra[36]%></td>
+                </tr>
+                <tr>
+                  <th>Sequencial de Fatura do Cliente Responsavel:</th>
+                  <td><%= cod_barra[37..42]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[43]%> - Pagamento de Fatura de Cliente Responsável</td>
+                </tr>
+              <%elsif cod_barra[43].match(/8/)%>
+                <tr>
+                  <th >Código da Localidade:</th>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
+                </tr>
+                <tr>
+                  <th >Código do Cliente:</th>
+                  <td ><%= cod_barra[22..29]%></td>
+                </tr>
+                <tr>
+                  <th>Sequencial do Documento de Cobrança</th>
+                  <td><%= cod_barra[30..38].insert(2,'/')%></td>
+                </tr>
+                <tr>
+                  <th>Código do Tipo de Documento:</th>
+                  <td><%= cod_barra[39..40]%></td>
+                </tr>
+                <tr>
+                  <th>Não Utilizado:</th>
+                  <td><%= cod_barra[41..42]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[43]%> - Documento de Cobrança Novo</td>
+                </tr>
+              <%elsif cod_barra[43].match(/9/)%>
+                <tr>
+                  <th >Código da Localidade:</th>
+                  <td ><%= cod_barra[19..21]%> - <%= @localidades["#{cod_barra[19..21]}"]%></td>
+                </tr>
+                <% if cod_barra[42].match(/0/) %>
+                  <tr>
+                    <th >Número de Identificação do Cliente:</th>
+                    <td ><%= cod_barra[22..29]%></td>
+                  </tr>
+                  <tr>
+                    <th>Identificador da Guia de Pagamento:</th>
+                    <td><%= cod_barra[30..38]%></td>
+                  </tr>
+                  <tr>
+                    <th>Não Utilizado:</th>
+                    <td><%= cod_barra[41..42]%></td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <th >Número de Identificação do Cliente:</th>
+                    <td ><%= cod_barra[22..30]%></td>
+                  </tr>
+                  <tr>
+                    <th>Identificador da Guia de Pagamento:</th>
+                    <td><%= cod_barra[31..39]%></td>
+                  </tr>
+                  <tr>
+                    <th>Não Utilizado:</th>
+                    <td><%= cod_barra[40..42]%></td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[43]%> -Guia de Pagamento com Identificação do Cliente</td>
+                </tr>
+              <%elsif cod_barra[19..20].match(/91/)%>
+                <tr>
+                  <th class="center">Matrícula do Imóvel:</th>
+                  <td class="center"><%= cod_barra[21..28]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Sequencial do Documento:</th>
+                  <td class="center"><%= cod_barra[29..37]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[38..43]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[19..20]%> - Pagamento de Compras Agrupadas</td>
+                </tr>
+              <%elsif cod_barra[19..20].match(/05/)%>
+                <tr>
+                  <th class="center">Código do Cliente Responsável:</th>
+                  <td class="center"><%= cod_barra[21..29]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Sequencial da Fatura:</th>
+                  <td class="center"><%= cod_barra[30..38]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[39..43]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[19..20]%> - Pagamento de Fatura (Legado)</td>
+                </tr>
+              <%elsif cod_barra[19..20].match(/94/)%>
+                <tr>
+                  <th class="center">Id Legado da Guia:</th>
+                  <td class="center"><%= cod_barra[21..29]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Número da Prestação da Guia:</th>
+                  <td class="center"><%= cod_barra[30..32]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Imóvel/Cliente:</th>
+                  <td class="center"><%= cod_barra[33..41]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Identificador Imóvel/Cliente:</th>
+                  <td class="center"><%= cod_barra[42]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[43]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[19..20]%> - Guia de Pagamento (Legado)</td>
+                </tr>
+              <%elsif cod_barra[19..20].match(/90|84/)%>
+                <tr>
+                  <th class="center">Matrícula do Imóvel:</th>
+                  <td class="center"><%= cod_barra[21..29]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Sequência do Documento:</th>
+                  <td class="center"><%= cod_barra[30..39][2..-1]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[39..43]%></td>
+                </tr>
+                <tr>                
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <% if cod_barra[19..20].match(/90/) %>
+                    <td><%= cod_barra[19..20]%> - Aviso de Corte (Legado)</td>
+                  <% else %>
+                    <td><%= cod_barra[19..20]%> - Aviso de Débito (Legado)</td>
+                  <% end %>
+                </tr>
+              <%elsif cod_barra[19..20].match(/14/)%>
+                <tr>
+                  <th class="center">Matrícula do Imóvel/Cliente:</th>
+                  <td class="center"><%= cod_barra[23..31]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Sequência do Documento:</th>
+                  <td class="center"><%= cod_barra[32..40]%></td>
+                </tr> 
+                <tr>
+                  <th class="center">Identificador Imóvel / Cliente:</th>
+                  <td class="center"><%= cod_barra[42]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[43]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[19..20]%> - Pagamento de Extrato (Legado)</td>
+                </tr>
+              <%elsif cod_barra[19..20].match(/35|36/)%>
+                <tr>
+                  <th class="center">Código de Localidade:</th>
+                  <td ><%= cod_barra[21..23]%> - <%= @localidades["#{cod_barra[21..23]}"]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Matrícula do Imóvel:</th>
+                  <td class="center"><%= cod_barra[24..31]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Sequêncial do Documento:</th>
+                  <td class="center"><%= cod_barra[32..39]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[40..43]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <% if cod_barra[19..20].match(/35/) %>
+                      <td class="center"><%= cod_barra[19..20]%> - Pagamento Extrato Parcelado (Legado)</td>
+                    <% else %>
+                      <td class="center"><%= cod_barra[19..20]%> - Pagamento Extrato Parcelado Cartão (Legado)</td>
+                  <% end %>
+                </tr>
+              <%elsif cod_barra[19..20].match(/37/)%>
+                <tr>
+                  <th class="center">Código de Localidade:</th>
+                  <td class="center"><%= cod_barra[21..23]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Pré Parcelamento:</th>
+                  <td class="center"><%= cod_barra[24..31]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Sequêncial do Documento:</th>
+                  <td class="center"><%= cod_barra[32..39]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[40..43]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[19..20]%> - Pagamento Carta (Legado)</td>
+                </tr>
+              <%elsif cod_barra[19..20].match(/15/)%>
+                <tr>
+                  <th class="center">Matricula do Imóvel:</th>
+                  <td class="center"><%= cod_barra[21..28]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Mês/Ano Conta:</th>
+                  <td class="center"><%= cod_barra[29..34].insert(2,'/')%></td>
+                </tr>
+                <tr>
+                  <th class="center">Código da Localidade:</th>
+                  <td ><%= cod_barra[35..37]%> - <%= @localidades["#{cod_barra[35..37]}"]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Serviço:</th>
+                  <td class="center"><%= cod_barra[38..40]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Não Utilizado:</th>
+                  <td class="center"><%= cod_barra[41..43]%></td>
+                </tr>
+                <tr>
+                  <th class="center">Tipo de Pagamento:</th>
+                  <td class="center"><%= cod_barra[19..20]%> - Pagamento Nota Recebimento (Legado)</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-    </div>
-</div>
+      </div>
