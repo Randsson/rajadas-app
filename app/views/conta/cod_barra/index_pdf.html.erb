@@ -1,6 +1,7 @@
+<h1 class="text-center"> Detalhes do Código de Barra </h1>
 <div class="card">
     <div class="card-header"><strong> Detalhes do Código de Barra</strong></div>
-    <% cod_barra = @cod_leitura  %>
+    <% cod_barra = cod_leitura  %>
         
     <div class="card-body">
         <div class="table-responsive-sm">
@@ -525,10 +526,10 @@
             </tbody>
           </table>
         </div>
-      <span class="navbar-text">
-      <button class="btn btn-primary" onClick="window.history.go(-1);">Voltar</button>          
-        <%= link_to conta_cod_barra_index_path(cod_leitura: @cod_leitura, format: :pdf), class:"btn btn-success" do%>
-          <i class="fas fa-file-pdf"></i>Baixar PDF
-        <% end %>
-      </span>
-</div>
+      </div>
+      <div class="container my-auto">
+          <br><br><br><br><br>
+          <div class="copyright text-center my-auto">
+              <span> &copy; GETIN/SUDEO - 2020</span>
+          </div>
+      </div>

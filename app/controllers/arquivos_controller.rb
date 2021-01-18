@@ -3,6 +3,8 @@ class ArquivosController < ApplicationController
   include ApplicationHelper
   layout 'files_panel'
 
+  respond_to :html, :pdf
+
   before_action :set_arquivo, only: %i[show edit update destroy]
   before_action :set_valor_total, only: %i[show]
   before_action :set_campos_barra, only: %i[show]
@@ -17,7 +19,6 @@ class ArquivosController < ApplicationController
   # GET /arquivos/1
   # GET /arquivos/1.json
   def show
-    # set_agencia
     respond_to do |format|
       format.html
       format.pdf do
@@ -25,10 +26,11 @@ class ArquivosController < ApplicationController
                page_size: 'A4',
                template: "arquivos/_show_barras.html.erb",
                layout: 'pdf.html',
-               orientation: 'Landscape',
                lowquality: true,
                zoom: 1,
-               dpi: 75
+               dpi: 75,
+               margin: { top: 30, bottom: 30, left: 10, right: 10 }
+               #header:  {   html: {  template: 'views/layouts/header'} } 
       end
     end
   end

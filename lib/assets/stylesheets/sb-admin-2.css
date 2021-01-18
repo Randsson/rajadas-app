@@ -84,6 +84,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
 
+.h1_pdf{
+  color: rgb(115, 115, 165);
+  text-align: center;
+}
+
 p {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -1487,13 +1492,14 @@ pre code {
   width: 100%;
   margin-bottom: 1rem;
   color: #858796;
+  border-bottom: 1px solid #828aaa;
 }
 
 .table th,
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #e3e6f0;
+  border-top: 1px solid #b7bac7;
 }
 
 .table thead th {

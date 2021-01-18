@@ -24,7 +24,7 @@
       <% @arquivo.documento.each do |doc| %>
         <% extrair_cod_barra(doc).each do |barra| %>
           <tr>
-            <td><p><%= link_to barra, conta_cod_barra_index_path(barra) %></p></td>
+            <td><p><%= link_to barra, conta_cod_barra_index_path(:cod_leitura => barra) %></p></td>
                           
             <!-- Localidade  não tem: 7,05,14, 94, 90(3 && cod_barra[19..20].match(/82/)) -->
             <% if  barra[43].match(/3/) && barra[19..20].match(/82/) ||

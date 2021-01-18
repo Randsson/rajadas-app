@@ -3,14 +3,27 @@ class Conta::CodBarraController < ApplicationController
   # before_action :set_arquivo, only: %w[index]
 
   def index
-    @cod_leitura = params[:format]
+    @cod_leitura = params[:cod_leitura]
     @formas_pagamentos = { '1' => 'Dinheiro', '2' => 'Cheque', '3' => 'Nao identificado' }
     canais_de_recebimento
     localidades
+
+    if params[:format] == 'pdf'
+      render pdf: 'Detalhes do Código de Barra',
+             page_size: 'A4',
+             template: 'conta/cod_barra/index_pdf.html.erb',
+             layout: 'pdf_cod_barra.html',
+             lowquality: true,
+             zoom: 1,
+             dpi: 75,
+             margin: { top: 10, bottom: 20, left: 10, right: 10 },
+             locals: { cod_leitura: @cod_leitura }
+      # header:  {   html: {  template: 'views/layouts/header'} }
+    end
   end
 
   private
- 
+
   def canais_de_recebimento
     @canais_de_recebimento = {
       '1' => 'Guichê de Caixa com fatura/guia de arrecadação',

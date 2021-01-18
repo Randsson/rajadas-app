@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "arquivos"%>
+    <%= wicked_pdf_stylesheet_link_tag "application"%>
+  </head>
+  <body>
+    <%= yield %>
+    <% wicked_pdf_javascript_include_tag "arquivos" %>
+    <% wicked_pdf_javascript_include_tag "application" %>
+  </body>
+</html>

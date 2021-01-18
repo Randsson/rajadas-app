@@ -26,7 +26,7 @@
           <% extrair_cod_barra(doc).each do |cod_barras| %>
             <% cod_barra = cod_barras[37..80]  %> 
               <tr>
-                <td><p><%= link_to truncate(cod_barras, length: 50), conta_display_index_path(cod_barras, :head => head) %></p></td>
+                <td><p><%= link_to truncate(cod_barras, length: 50), conta_display_index_path(cod_leitura: cod_barras, head: head) %></p></td>
                 
                 <!-- Localidade  não tem: 7,05,14, 94, 90(3 && cod_barra[19..20].match(/82/)) -->
                 <% if  cod_barra[43].match(/3/) && cod_barra[19..20].match(/82/) ||

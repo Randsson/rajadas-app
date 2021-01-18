@@ -3,11 +3,24 @@ class Conta::DisplayController < ApplicationController
   # before_action :set_barra, only: %i[show]
 
   def index
-    @cod_leitura = params[:format]
+    @cod_leitura = params[:cod_leitura]
     @formas_pagamentos = { '1' => 'Dinheiro', '2' => 'Cheque', '3' => 'Nao identificado' }
     canais_de_recebimento
     localidades
     @head = params[:head].strip
+
+    if params[:format] == 'pdf'
+      render pdf: 'Detalhes do Código de Barra',
+             page_size: 'A4',
+             template: 'conta/display/index_pdf.html.erb',
+             layout: 'pdf_cod_barra.html',
+             lowquality: true,
+             zoom: 1,
+             dpi: 75,
+             margin: { top: 5, bottom: 5, left: 10, right: 10 },
+             locals: { cod_leitura: @cod_leitura }
+      # header:  {   html: {  template: 'views/layouts/header'} }
+    end
   end
 
   def show
@@ -32,7 +45,7 @@ class Conta::DisplayController < ApplicationController
 
   def localidades
     @localidades = {
-      # Unidade sertão
+      # Unidade sertao
       '001' => 'Água Branca',
       '016' => 'Canapi',
       '025' => 'Delmiro Gouveia',

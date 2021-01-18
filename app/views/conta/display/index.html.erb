@@ -560,11 +560,10 @@
       </div>
     </div>
   </div>
-    <br>
   <span class="navbar-text">
-    <button class="btn btn-primary" onClick="window.history.go(-1);">Voltar</button>
-    <%= link_to arquivo_path(params[:format], format: :pdf), class:"btn btn-success" do%>
-      <i class="fas fa-file-pdf"></i> Baixar PDF
-    <% end %>
+      <button class="btn btn-primary" onClick="window.history.go(-1);">Voltar</button>          
+      <%= link_to conta_display_index_path(cod_leitura: @cod_leitura, head: @head, format: :pdf), class:"btn btn-success" do%>
+          <i class="fas fa-file-pdf"></i>Baixar PDF
+      <% end %>
   </span>
 </div>
