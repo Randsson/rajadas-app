@@ -6,8 +6,8 @@ Aplicação para leitura de código de barra
 
 * Rails version: 5.2.4
 
-* Database: Mysql
+* Database: Mysql ('mysql2', '>= 0.4.4', '< 0.6.0')
 
-* Front-end: Bootstrap
+* Front-end: Bootstrap 4, HTML, CSS
 
-* Package Manager: Yarn
+* Packages Manager: Yarn 1.22.5
