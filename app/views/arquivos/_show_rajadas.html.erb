@@ -23,7 +23,7 @@
     <tbody class= "text-primary">
       <% @arquivo.documento.each do |doc| %>
       <% head = extrair_header(doc)  %>
-          <% extrair_cod_barra(doc).each do |cod_barras| %>
+          <% extrair_cod_rajada(doc).each do |cod_barras| %>
             <% cod_barra = cod_barras[37..80]  %> 
               <tr>
                 <td><p><%= link_to truncate(cod_barras, length: 50), conta_display_index_path(cod_leitura: cod_barras, head: head) %></p></td>

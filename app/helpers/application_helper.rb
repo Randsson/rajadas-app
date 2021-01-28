@@ -9,6 +9,11 @@ module ApplicationHelper
   def extrair_cod_barra(arquivo)
     path = ActiveStorage::Blob.service.path_for(arquivo.key)
     doc = File.readlines(path)
+  end
+
+  def extrair_cod_rajada(arquivo)
+    path = ActiveStorage::Blob.service.path_for(arquivo.key)
+    doc = File.readlines(path)
     doc[1...-1]
   end
 
@@ -62,22 +67,27 @@ module ApplicationHelper
     line unless line[30..38].match(/\d{2}20\d{2}/)
   end
 
-  def cod_rajada_campos
-    campos = [
-      ['Todos...', 1],
-      ['Tipo do documento', 2],
-      ['Código da Localidade', 3],
-      ['Forma de Arrecadação', 4],
-      ['NSR', 5],
-      ['Data Inválida', 6]
-    ]
-  end
+  # def cod_rajada_campos
+  #   campos = [
+  #     ['Todos...', 1],
+  #     ['Tipo do documento', 2],
+  #     ['Código da Localidade', 3],
+  #     ['Forma de Arrecadação', 4],
+  #     ['NSR', 5],
+  #     ['Data Inválida', 6]
+  #   ]
+  # end
 
-  def cod_barra_campos
-    campos = [
-      ['Todos...', 1],
-      ['Código da Localidade', 3],
-      ['Data Inválida', 6]
-    ]
+  # def cod_barra_campos
+  #   campos = [
+  #     ['Todos...', 1],
+  #     ['Código da Localidade', 3],
+  #     ['Data Inválida', 6]
+  #   ]
+  # end
+
+  def extrair_contas_legado(arquivo)
+    path = ActiveStorage::Blob.service.path_for(arquivo.key)
+    doc = File.readlines(path).select { |line| line [19..20].match(/84|90/) }
   end
 end

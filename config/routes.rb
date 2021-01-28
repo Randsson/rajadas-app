@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :conta do
     resources :cod_barra, only: %i[index show]
     resources :display, only: %i[index show]
-    get 'search/index'
+    resources :search, only: %i[index]
   end
   
   root to: "arquivos#index"

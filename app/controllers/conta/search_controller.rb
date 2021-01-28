@@ -3,19 +3,18 @@ class Conta::SearchController < ApplicationController
   layout 'files_panel'
   before_action :set_arquivo, only: %i[index]
   before_action :set_valor_total, only: %i[index]
-  before_action :set_campos_barra, only: %i[index]
-  before_action :set_campos_cod_barra, only: %i[index]
+  # before_action :set_campos_barra, only: %i[index]
+  # before_action :set_campos_cod_barra, only: %i[index]
   before_action :set_tamanho_barra, only: %i[index]
  
   def index
-    @filtro = params[:filtro]
-    @termo = params[:term]
+    
   end
 
   private
 
   def set_arquivo
-    @arquivo = Arquivo.find(params[:format])
+    @arquivo = Arquivo.find(params[:id])
   end
 
   def set_valor_total

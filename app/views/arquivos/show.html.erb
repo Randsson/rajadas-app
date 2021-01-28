@@ -34,36 +34,6 @@
       </tr>
     </tbody>
   </table>
-<!--
-</div>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= form_with(url: conta_search_index_path(@arquivo),local: true, method: :get, class:"nav-link") do |f| %>
-          <div class="form-row">
-              <div class="form-inline">      
-              <%= f.select(:filtro, @campos)%>
-              <%= f.text_field :term, class:"form-control mr-sm-2"%>
-              <button type="submit" class="btn btn-primary my-2 my-sm-0">Filtrar</button>
-          </div>
-        <% end %>
-      </li>
-    </ul>
-    <span class="navbar-text">        
-      <%= link_to arquivos_path, class:"btn btn-primary my-2 my-sm-0" do %>
-          <i class="far fa-file-alt"></i>
-          <span>Arquivos</span></a>
-      <% end %>
-      <%= link_to edit_arquivo_path(@arquivo), class:"btn btn-info my-2 my-sm-0" do %>
-        <i class="fas fa-file-signature"></i>Editar
-      <% end %>
-      <%= link_to arquivo_path(@arquivo, format: :pdf), class:"btn btn-success" do%>
-        <i class="fas fa-file-pdf"></i>Baixar PDF
-      <% end %>
-    </span>
-  </div>
--->
- 
  <% if @tamanho_barra.first.size < 50 %>
   <%= render 'show_barras', arquivo: @arquivo %>
 <% else %>
