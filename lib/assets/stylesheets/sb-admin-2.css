@@ -1487,6 +1487,11 @@ pre code {
     margin-left: 91.66667%;
   }
 }
+/*pdf correcao */
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
+}
+
 
 .table {
   width: 100%;

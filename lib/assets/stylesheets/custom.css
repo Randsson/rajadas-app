@@ -1,7 +1,3 @@
-.arquivo-box {
- margin-bottom: 10px;
-}
-
-.center{
-  width: 20%;
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
 }

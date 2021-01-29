@@ -3,7 +3,7 @@ class ArquivosController < ApplicationController
   include ApplicationHelper
   layout 'files_panel'
 
-  respond_to :html, :pdf
+  respond_to :html, :pdf, :csv
 
   before_action :set_arquivo, only: %i[show edit update destroy]
   before_action :set_valor_total, only: %i[show]
@@ -24,7 +24,7 @@ class ArquivosController < ApplicationController
       format.pdf do
         render pdf: "Tabela do Arquivo: #{@arquivo.id}",
                page_size: 'A4',
-               template: "arquivos/_show_barras.html.erb",
+               template: set_template,
                layout: 'pdf.html',
                lowquality: true,
                zoom: 1,
@@ -99,9 +99,9 @@ class ArquivosController < ApplicationController
     @valor_total = valor_total_arquivo(@arquivo)
   end
 
-  # def set_campos_barra
-  #   @campos = cod_barra_campos
-  # end
+  def set_template
+    params[:type] == 'barra' ? "arquivos/_show_barras.html.erb" : "arquivos/_show_rajadas.html.erb"
+  end
 
   def set_tamanho_barra
     @tamanho_barra = extrair_cod_barra(@arquivo.documento.first)

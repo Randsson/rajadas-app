@@ -8,7 +8,7 @@
     <%= link_to edit_arquivo_path(@arquivo), class:"btn btn-info my-2 my-sm-0" do %>
       <i class="fas fa-file-signature"></i> Editar
     <% end %>
-    <%= link_to arquivo_path(@arquivo, format: :pdf), class:"btn btn-success" do%>
+    <%= link_to arquivo_path(@arquivo, format: :pdf, type: :rajada), class:"btn btn-success" do%>
       <i class="fas fa-file-pdf"></i> Baixar PDF
     <% end %>
   </span>
