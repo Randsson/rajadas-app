@@ -7,4 +7,4 @@
 //= require jquery.easing/jquery.easing
 //= require datatables/media/js/jquery.dataTables
 # Pretty simple jQuery plugin that turns standard Bootstrap alerts into hovering 'Growl-like' notifications.
-//= require bootstrap-growl-ifightcrime/jquery.bootstrap-growl 
+//= require bootstrap-growl-ifightcrime/jquery.bootstrap-growl
