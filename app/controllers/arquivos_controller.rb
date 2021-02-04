@@ -50,8 +50,8 @@ class ArquivosController < ApplicationController
 
     respond_to do |format|
       if @arquivo.save
-        format.html { redirect_to @arquivo, notice: 'Arquivo criado com sucesso' }
-        format.json { render :show, status: :created, location: @arquivo }
+        format.html { redirect_to arquivos_path, notice: 'Arquivo criado com sucesso' }
+        format.json { render :index, status: :created, location: @arquivo }
       else
         format.html { render :new }
         format.json { render json: @arquivo.errors, status: :unprocessable_entity }
@@ -104,6 +104,6 @@ class ArquivosController < ApplicationController
   end
 
   def set_tamanho_barra
-    @tamanho_barra = extrair_cod_barra(@arquivo.documento.first)
+    @tamanho_barra = extrair_cod_barra(@arquivo.documento.first).first.size
   end
 end
