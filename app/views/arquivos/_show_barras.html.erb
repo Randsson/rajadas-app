@@ -22,7 +22,8 @@
     </thead>
     <tbody class= "text-primary">
       <% @arquivo.documento.each do |doc| %>
-        <% extrair_cod_barra(doc).each do |barra| %>
+        <% barras = extrair_cod_barra(doc) %>
+        <% barras.each do |barra| %>
           <tr>
             <td><p><%= link_to barra, conta_cod_barra_index_path(:cod_leitura => barra) %></p></td>
                           
