@@ -3,7 +3,6 @@
 <head>
     <title>Rajadas App</title>
     <%= stylesheet_link_tag 'arquivos'%>
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -47,21 +46,6 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>      
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                         </li>
                     </ul>
                 </nav> <!-- Conteúdo -->
@@ -96,5 +80,38 @@
             });
         <% end %>
     <% end %> -->
+
+    <%= javascript_tag do %>
+        $(document).ready( function () {
+        
+            var barras = document.getElementById("table-barras");
+            var data = [];
+
+            if (barras == null){
+                $("table#table-rajadas tr").each(function() {
+                    var arrayOfThisRow = [];
+                    var tableData = $(this).find('td');
+                    if (tableData.length > 0) {
+                        tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+                        data.push(arrayOfThisRow);
+                    }
+                });
+            }else{
+                $("table#table-barras tr").each(function() {
+                    var arrayOfThisRow = [];
+                    var tableData = $(this).find('td');
+                    if (tableData.length > 0) {
+                        tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+                        data.push(arrayOfThisRow);
+                    }
+                });
+            };
+
+            $('#table-barras, #table-rajadas').dataTable( {
+                data: data,
+                paginate: false
+            });
+        });
+    <% end %>
 </body>
 </html>
