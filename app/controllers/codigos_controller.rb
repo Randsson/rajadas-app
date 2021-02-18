@@ -1,4 +1,5 @@
 class CodigosController < ApplicationController
+  layout 'files_panel'
   before_action :set_codigo, only: [:show, :edit, :update, :destroy]
 
   # GET /codigos
@@ -28,7 +29,7 @@ class CodigosController < ApplicationController
 
     respond_to do |format|
       if @codigo.save
-        format.html { redirect_to @codigo, notice: 'Codigo was successfully created.' }
+        format.html { redirect_to codigos_path, notice: 'Codigo was successfully created.' }
         format.json { render :show, status: :created, location: @codigo }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class CodigosController < ApplicationController
   def update
     respond_to do |format|
       if @codigo.update(codigo_params)
-        format.html { redirect_to @codigo, notice: 'Codigo was successfully updated.' }
+        format.html { redirect_to codigos_path, notice: 'Código cadastrado.' }
         format.json { render :show, status: :ok, location: @codigo }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class CodigosController < ApplicationController
   def destroy
     @codigo.destroy
     respond_to do |format|
-      format.html { redirect_to codigos_url, notice: 'Codigo was successfully destroyed.' }
+      format.html { redirect_to codigos_url, notice: 'Codigo foi excluído.' }
       format.json { head :no_content }
     end
   end
