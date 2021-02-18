@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Codigos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @codigos.each do |codigo| %>
+      <tr>
+        <td><%= codigo.codigo %></td>
+        <td><%= link_to 'Show', codigo %></td>
+        <td><%= link_to 'Edit', edit_codigo_path(codigo) %></td>
+        <td><%= link_to 'Destroy', codigo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Codigo', new_codigo_path %>

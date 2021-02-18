@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-   
   devise_for :users
+   
+  resources :codigos
+  resources :arquivos
+  
   namespace :conta do
     resources :cod_barra, only: %i[index show]
     resources :display, only: %i[index show]
@@ -8,6 +11,5 @@ Rails.application.routes.draw do
   end
   
   root to: "arquivos#index"
-  resources :arquivos
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
