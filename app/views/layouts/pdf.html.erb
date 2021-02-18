@@ -15,7 +15,7 @@
         <th class= "">Título</th>
         <th>Descrição</th>
         <th>Arquivo</th>
-        <% if @tamanho_barra.first.size > 45 %>  
+        <% if @tamanho_barra > 45 %>  
           <th>Valor Total Recebido</th>
         <% end %>
       </tr>
@@ -32,7 +32,7 @@
           </div>
         </td>
 
-        <% if @tamanho_barra.first.size > 45 %>  
+        <% if @tamanho_barra > 45 %>  
           <td>
             <% @valor_total.each do |valor| %>    
               <span style="font-size: 100%;", class="badge badge-info"><%= number_to_currency_br(valor.insert(-3,'.'))%></span>

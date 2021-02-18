@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <title>Rajadas App</title>
+    <title>Eureca</title>
     <%= stylesheet_link_tag 'arquivos'%>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -84,7 +84,7 @@
     <%= javascript_tag do %>
         $(document).ready( function () {
         
-            var barras = document.getElementById("table-barras");
+            <%# var barras = document.getElementById("table-barras");
             var data = [];
 
             if (barras == null){
@@ -105,10 +105,9 @@
                         data.push(arrayOfThisRow);
                     }
                 });
-            };
+            }; %>
 
             $('#table-barras, #table-rajadas').dataTable( {
-                data: data,
                 paginate: false
             });
         });

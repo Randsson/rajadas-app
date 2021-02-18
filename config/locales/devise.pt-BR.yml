@@ -24,9 +24,9 @@ pt-BR:
       unlock_instructions:
         subject: "Unlock instructions"
       email_changed:
-        subject: "Email Changed"
+        subject: "Email alterado"
       password_change:
-        subject: "Password Changed"
+        subject: "Senha alterada"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
