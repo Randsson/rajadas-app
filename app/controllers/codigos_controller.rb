@@ -25,11 +25,13 @@ class CodigosController < ApplicationController
   # POST /codigos
   # POST /codigos.json
   def create
-    @codigo = Codigo.new(codigo_params)
+    @codigo = Codigo.new(
+      codigo: reduzir_codigo(codigo_params['codigo'])
+    )
 
     respond_to do |format|
       if @codigo.save
-        format.html { redirect_to codigos_path, notice: 'Codigo was successfully created.' }
+        format.html { redirect_to codigos_path, notice: 'Código inserido com sucesso.' }
         format.json { render :show, status: :created, location: @codigo }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class CodigosController < ApplicationController
   def update
     respond_to do |format|
       if @codigo.update(codigo_params)
-        format.html { redirect_to codigos_path, notice: 'Código cadastrado.' }
+        format.html { redirect_to codigos_path, notice: 'Código atualizado.' }
         format.json { render :show, status: :ok, location: @codigo }
       else
         format.html { render :edit }
@@ -68,6 +70,10 @@ class CodigosController < ApplicationController
       @codigo = Codigo.find(params[:id])
     end
 
+    def reduzir_codigo(codigo)
+      [].join << codigo[0..10] << codigo[12..22] << codigo[24..34] << codigo[36..46]
+    end
+    
     # Only allow a list of trusted parameters through.
     def codigo_params
       params.require(:codigo).permit(:codigo)
