@@ -25,8 +25,9 @@ class CodigosController < ApplicationController
   # POST /codigos
   # POST /codigos.json
   def create
+    code = codigo_params['codigo']
     @codigo = Codigo.new(
-      codigo: reduzir_codigo(codigo_params['codigo'])
+      codigo: code.size == 44 ? code : reduzir_codigo(code)
     )
 
     respond_to do |format|
